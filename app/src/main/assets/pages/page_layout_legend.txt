@@ -1,0 +1,8 @@
+Type width height pos_x pos_y file_name duration
+image 1.0 0.4 0.0 0.5 sq_start_display
+button 0.3 0.2 0.0 -0.5 sq_start_blue
+anim 0.3 0.2 0.0 -0.5 rotten_deadlift
+static_object 0.3 0.2 0.0 -0.5 rotten_mesh texture
+fast_anim 0.3 0.2 0.0 -0.5 mesh bones keyframes texture
+timer width height pos_x pos_y atlas_name time
+animator keyframes bones

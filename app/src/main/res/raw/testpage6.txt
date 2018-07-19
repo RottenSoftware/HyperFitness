@@ -1,0 +1,4 @@
+Type width height pos_x pos_y file_name
+image 0.5 0.2 0.0 0.5 sq_squads
+button 0.3 0.2 0.0 -0.5 sq_start_blue
+anim 0.3 0.2 0.0 -0.5 rotten_flex

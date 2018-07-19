@@ -1,0 +1,5 @@
+Type width height pos_x pos_y file_name duration
+image 1.0 0.4 0.0 0.75 sq_start_display
+button 0.3 0.2 0.0 -0.7 sq_start_blue
+fast_anim 0.3 0.2 0.0 -0.5 mesh_b bones_b rotten_deadlifts model_texture
+timer 0.15 0.15 0.6 0.3 sq_number_atlas 30

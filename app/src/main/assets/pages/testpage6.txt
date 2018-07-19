@@ -1,0 +1,3 @@
+Type width height pos_x pos_y file_name
+image 0.5 0.2 0.0 0.75 sq_good
+fast_anim 0.3 0.2 0.0 -0.5 mesh_b bones_b rotten_walk model_texture
