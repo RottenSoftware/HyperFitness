@@ -3,4 +3,4 @@ image 1.0 0.4 0.0 0.75 sq_start_display
 button 0.3 0.2 0.0 -0.7 sq_start_blue
 ffast_anim 0.3 0.2 0.0 -0.5 fitness_app_test_mesh fitness_app_test_bones help_debug fitness_app_test_texture
 ffast_anim 0.3 0.2 0.0 -0.5 mesh_b bones_b rotten_deadlift_debug model_texture
-fast_anim 0.3 0.2 0.0 -0.5 square_mesh square_bones square_keyframes normals_iwhite_image
+fast_anim 0.3 0.2 0.0 -0.5 decimate_gemometry_06_mesh decimate_gemometry_06_bones decimate_gemometry_06_keyframes fitness_app_test_texture

@@ -25,7 +25,7 @@ public class start_page
     private Context context;
     private Touch_point_parser touchpoint;
     private Pages page;
-    private  ArrayList<Page_Content> content;
+    private ArrayList<Page_Content> content;
 
 
 
@@ -53,7 +53,6 @@ public class start_page
 
     //testplayer = MediaPlayer.create(context, R.raw.wayne);
     //testplayer.start();
-        test_arraylists test = new test_arraylists();
 
 
         file_names = new ArrayList<>();

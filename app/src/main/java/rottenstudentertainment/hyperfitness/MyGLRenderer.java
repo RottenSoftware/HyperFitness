@@ -50,13 +50,6 @@ import static android.opengl.Matrix.translateM;
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private static final String TAG = "MyGLRenderer";
-    private Triangle mTriangle;
-    private Square   mSquare;
-    private Cube mycube;
-    private real_cube thecube;
-    private Cube_Grid cube_grid;
-    private image_square imagesquare;
-    private image_Cube image_cube;
     //private Sprite_Square sprite_square;
     private animated_figure anim;
 
@@ -99,23 +92,10 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glEnable(GL_DEPTH_TEST);
 
-//        mTriangle = new Triangle();
-//        mSquare   = new Square();
-//        mycube = new Cube();
-//        thecube = new real_cube();
-//        cube_grid = new Cube_Grid();
-//        imagesquare = new image_square(context);
-//        image_cube = new image_Cube(context);
-//        sprite_square = new Sprite_Square(context);
-       // anim = new fast_animated_figure(context);
 
         startPage = new start_page(context);
         touch_point_parser = new Touch_point_parser(0f,0f);
 
-        //heightmap = new Heightmap(  (BitmapDrawable) context.getResources().getDrawable( R.drawable.heightmap_256, null).getBitmap()  );
-        //heightmap = new Heightmap(  (BitmapDrawable) context.getDrawable( R.drawable.heightmap_256).getBitmap()  );
-
-        //heightmap = new Heightmap( context, R.drawable.heightmap_256 );
     }
 
     @Override
@@ -139,15 +119,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0f);
-
-//        // Calculate the projection and view transformation
-//        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
-//
-//
-//       //apply model
-//        Matrix.multiplyMM(model_buffer, 0, mMVPMatrix, 0, model_Matrix, 0);
-//        System.arraycopy(model_buffer, 0, mMVPMatrix, 0, model_buffer.length);
-
 
 
         Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, 1.0f);

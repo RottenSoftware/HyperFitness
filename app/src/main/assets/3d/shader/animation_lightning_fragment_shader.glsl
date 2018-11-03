@@ -1,9 +1,11 @@
 precision mediump float;
 uniform sampler2D u_TextureUnit;
-varying vec2 v_TextureCoordinates;
-varying vec3 adjusted_normal;
+
 uniform vec3 lightDirection;
 uniform float ambientLight;
+
+varying vec2 v_TextureCoordinates;
+varying vec3 adjusted_normal;
 
 void main()
 {

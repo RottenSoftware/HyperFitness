@@ -36,11 +36,14 @@ public class VertexBuffer {
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
     }
 
-
+    //vao
     public void setVertexAttribPointer( int dataOffset, int attributeLocation, int componentCount, int stride){
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, bufferId);
         GLES20.glVertexAttribPointer( attributeLocation, componentCount, GLES20.GL_FLOAT, false, stride ,dataOffset);
         GLES20.glEnableVertexAttribArray(attributeLocation);
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
     }
+
+
+
 }

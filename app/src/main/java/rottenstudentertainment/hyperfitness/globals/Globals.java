@@ -5,7 +5,7 @@ package rottenstudentertainment.hyperfitness.globals;
  */
 
 public class Globals {
-    public final static boolean useGPUStorage = true;
+    public final static boolean useGPUStorage = false;
     public final static boolean useLightning = true;
 
     public final static boolean useLogs = true;
