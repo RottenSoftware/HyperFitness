@@ -1,10 +1,14 @@
 package rottenstudentertainment.hyperfitness;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
+import rottenstudentertainment.hyperfitness.AdMob.AdMob;
 import rottenstudentertainment.hyperfitness.test.Page_number;
 
 public class OpenGLES20Activity extends Activity {
@@ -30,7 +34,13 @@ public class OpenGLES20Activity extends Activity {
         }
 
         mGLView = new MyGLSurfaceView(this);
-        setContentView(mGLView);
+        //setContentView(mGLView);
+        setContentView( R.layout.app_container);
+        ViewGroup container = (ViewGroup) findViewById( R.id.container);
+        container.addView(mGLView);
+
+        AdMob.initializeAdMob( this);
+        AdMob.loadAdBanner(this);
 
     }
 

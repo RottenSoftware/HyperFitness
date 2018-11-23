@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">hyperFitness</string>
+    <string name="container">view_container</string>
 </resources>
