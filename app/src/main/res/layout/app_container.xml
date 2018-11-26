@@ -10,11 +10,10 @@
 
 
     <Button
-        android:id="@+id/testid"
+        android:id="@+id/goButton"
         android:layout_width="127dp"
         android:layout_height="42dp"
         android:background="@drawable/buttonshape"
-        android:text="test"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

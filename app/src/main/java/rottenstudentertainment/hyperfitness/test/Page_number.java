@@ -20,4 +20,9 @@ public class Page_number
     {
         return i;
     }
+
+    public static void next_page()
+    {
+        i++;
+    }
 }

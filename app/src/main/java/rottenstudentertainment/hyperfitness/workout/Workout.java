@@ -2,37 +2,26 @@ package rottenstudentertainment.hyperfitness.workout;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 
 import rottenstudentertainment.hyperfitness.OpenGL.background_image;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
-import rottenstudentertainment.hyperfitness.R;
-import rottenstudentertainment.hyperfitness.Texture;
-import rottenstudentertainment.hyperfitness.TextureHelper;
 import rottenstudentertainment.hyperfitness.test.Page_number;
-import rottenstudentertainment.hyperfitness.test.test_arraylists;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
-
-import java.util.ArrayList;
 
 
 /**
  * Created by Merty on 29.10.2017.
- * Adminitrates Logic and Pages
+ * Adminitrates Logic and Page
  */
 
-public class start_page
+public class Workout
 {
     private Context context;
     private Touch_point_parser touchpoint;
-    private Pages page;
+    private Page page;
     private ArrayList<Page_Content> content;
 
-
-
-
-
-    //global to go back through pages/ exercises
-    private Page_number page_number;
 
     private background_image background;
 
@@ -42,7 +31,7 @@ public class start_page
 
     //MediaPlayer testplayer;
 
-    public start_page(Context context)
+    public Workout(Context context)
     {
         this.context = context;
         touchpoint = new Touch_point_parser(0f,0f);
@@ -75,7 +64,7 @@ public class start_page
 
 
 
-        page = new Pages(context, page_content);
+        page = new Page(context, page_content);
 
         //Log.e("start_page", "start_page: content 0 button size  :" + content.get(0).buttons.size());
         //Log.e("start_page", "from assets  :" + TextResourceReader.readTextFromAssets(context, "stuff/more_stuff/animation_vertex_shader.glsl"));
@@ -84,7 +73,7 @@ public class start_page
 
     }
 
-    public void draw_start_page(float[] m, float[] m3d)
+    public void draw_page(float[] m, float[] m3d)
     {
         set_page();
         background.draw_background();
@@ -102,19 +91,25 @@ public class start_page
 
     private void set_page()
     {
-        if(i > page_number.get_page() )
+        if(i != Page_number.get_page() )
         {
-            i = page_number.get_page();
-            page = new Pages(context, new Page_Content(context, file_names.get(i)));
+            i = Page_number.get_page();
+            page = new Page(context, new Page_Content( context, file_names.get(i)));
         }
         else if(i == file_names.size()) System.exit(1);
+        else if( i > Page_number.get_page() ){
+
+        }
+        /*
         else if(page.status() && i < file_names.size()-1)
         {
-            page = new Pages(context, new Page_Content(context, file_names.get(++i)));
+            page = new Page(context, new Page_Content( context, file_names.get(++i)));
             page_number.set_i(i);
         }
+        */
 
         // set page for saved instance object
         OpenGLES20Activity.resume_page = i;
     }
+
 }

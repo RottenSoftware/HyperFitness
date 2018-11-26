@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 import rottenstudentertainment.hyperfitness.util.Accessor;
+import rottenstudentertainment.hyperfitness.workout.page_objects.AndroidButton_Object;
 import rottenstudentertainment.hyperfitness.workout.page_objects.Anim_Object;
 import rottenstudentertainment.hyperfitness.workout.page_objects.Button_Object;
 import rottenstudentertainment.hyperfitness.workout.page_objects.Fast_Anim_Object;
@@ -34,6 +35,7 @@ public class Page_Content
     public  static ArrayList<Static_Object_Object> statics;
     public  static ArrayList<Fast_Anim_Object> fast_anims;
     public static ArrayList<animator_object> animators;
+    public static ArrayList<AndroidButton_Object> androidButtons;
 
 
 
@@ -49,10 +51,6 @@ public class Page_Content
 
 
 
-
-
-
-
     public Page_Content(Context context, String file_name)
     {
         images = new ArrayList<>();
@@ -63,6 +61,7 @@ public class Page_Content
         fast_anims = new ArrayList<>();
 
         animators = new ArrayList<>(); // to store keyframes and force on animations
+        androidButtons = new ArrayList<>();
 
         page_reader(context, file_name);
     }
@@ -79,6 +78,7 @@ public class Page_Content
         String timer_tag = "timer";
         String fast_anim_tag = "fast_anim";
         String animator_tag = "animator";
+        String androidButton_tag = "androidButton";
 
         file_name = "pages/" + file_name + ".txt";
 
@@ -146,10 +146,12 @@ public class Page_Content
                         animator_object animator = new animator_object(type_data[i+1], type_data[i+2] );
                         animators.add(animator);
                     }
-
-
-
-
+                    else if (type_data[i].equals(androidButton_tag))
+                    {
+                        // button in android ui
+                        AndroidButton_Object androidButton = new AndroidButton_Object(type_data[i+1], type_data[i+2], type_data[i+3] );
+                        androidButtons.add( androidButton);
+                    }
                 }
             }
 

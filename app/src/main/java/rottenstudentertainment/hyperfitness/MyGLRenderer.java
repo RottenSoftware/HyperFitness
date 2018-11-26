@@ -19,7 +19,6 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.os.SystemClock;
 import android.util.Log;
 
 import rottenstudentertainment.hyperfitness.animation.animated_figure;
@@ -27,7 +26,7 @@ import rottenstudentertainment.hyperfitness.heightmap.Heightmap;
 import rottenstudentertainment.hyperfitness.util.Framerate_display;
 import rottenstudentertainment.hyperfitness.util.MatrixHelper;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
-import rottenstudentertainment.hyperfitness.workout.start_page;
+import rottenstudentertainment.hyperfitness.workout.Workout;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -59,7 +58,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Heightmap heightmap;
 
 
-    private start_page startPage;
+    private Workout workout;
 
     private Context context;
 
@@ -93,7 +92,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         glEnable(GL_DEPTH_TEST);
 
 
-        startPage = new start_page(context);
+        workout = new Workout(context);
         touch_point_parser = new Touch_point_parser(0f,0f);
 
     }
@@ -148,9 +147,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(shit, 0, m_buffer, 0,scalem, 0);
 
 
-        startPage.update_input(touch_point_parser);
+        workout.update_input(touch_point_parser);
 
-        startPage.draw_start_page(ortho_Matrix, mMVPMatrix);
+        workout.draw_page(ortho_Matrix, mMVPMatrix);
 
         long endTime = System.currentTimeMillis(); // end of frame time
         long dt =  (endTime - startTime);  // length of frame time

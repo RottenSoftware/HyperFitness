@@ -14,7 +14,6 @@ import rottenstudentertainment.hyperfitness.test.Page_number;
 public class OpenGLES20Activity extends Activity {
 
     private GLSurfaceView mGLView;
-    private Page_number page_number;
 
     //for resuming activity
     public static int resume_page;
@@ -29,7 +28,7 @@ public class OpenGLES20Activity extends Activity {
         if(savedInstanceState != null)
         {
             resume_page = savedInstanceState.getInt("resume_page");
-            page_number.set_i(resume_page);
+            Page_number.set_i(resume_page);
             Log.e("openglesactivity", "restored state: resume_page: " + resume_page);
         }
 
@@ -82,9 +81,9 @@ public class OpenGLES20Activity extends Activity {
 
     @Override
     public void onBackPressed() {        // to prevent irritating accidental logouts
-        if ( page_number.get_page() > 0 )
+        if ( Page_number.get_page() > 0 )
         {
-            page_number.set_i(Page_number.get_page() -1 );
+            Page_number.set_i(Page_number.get_page() -1 );
             return;
         } else {    // this guy is serious
             // clean up

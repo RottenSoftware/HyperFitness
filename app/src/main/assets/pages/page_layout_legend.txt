@@ -6,3 +6,4 @@ static_object 0.3 0.2 0.0 -0.5 rotten_mesh texture
 fast_anim 0.3 0.2 0.0 -0.5 mesh bones keyframes texture
 timer width height pos_x pos_y atlas_name time
 animator keyframes bones
+androidButton   id  text    function

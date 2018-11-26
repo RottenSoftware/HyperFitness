@@ -14,10 +14,12 @@ import rottenstudentertainment.hyperfitness.new_animation.Static_Object;
 import rottenstudentertainment.hyperfitness.new_animation.fast_animated_figure;
 import rottenstudentertainment.hyperfitness.user_interface.Rotation_angle;
 import rottenstudentertainment.hyperfitness.util.Accessor;
+import rottenstudentertainment.hyperfitness.util.AndroidButton;
 import rottenstudentertainment.hyperfitness.util.Button;
 import rottenstudentertainment.hyperfitness.util.MatrixHelper;
 import rottenstudentertainment.hyperfitness.util.Timer;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
+import rottenstudentertainment.hyperfitness.workout.page_objects.AndroidButton_Object;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ import static android.opengl.GLES20.glEnable;
 
 
 
-public class Pages
+public class Page
 {
     private Context context;
     private Button button;
@@ -49,6 +51,7 @@ public class Pages
     private ArrayList<Button> buttons;
     private ArrayList<animated_figure> animations;
     private ArrayList<Timer> timers;
+    private ArrayList<AndroidButton> androidButtons;
 
     private ArrayList<Animator> animator;
 
@@ -57,7 +60,7 @@ public class Pages
 
     private ArrayList<Static_Object> statics;
 
-    public Pages(Context context, Page_Content content)
+    public Page(Context context, Page_Content content)
     {
         this.context = context;
         this.content = content;
@@ -67,6 +70,7 @@ public class Pages
         textures = new ArrayList<>();
         buttons = new ArrayList<>();
         timers = new ArrayList<>();
+        androidButtons = new ArrayList<>();
 
 
         //3d
@@ -84,6 +88,12 @@ public class Pages
             textures.add( new Texture(context, TextureHelper.loadTexture(context,
                     Accessor.all_resource_ints( content.images.get(i).get_name() ) ), R.drawable.start_display , content.images.get(i).get_width(), content.images.get(i).get_height() ) );
            // Log.e("after", "in");
+        }
+
+        for(int i = 0; i < content.androidButtons.size(); i++)
+        {
+            AndroidButton_Object  andButtonObj = content.androidButtons.get(i);
+            androidButtons.add( new AndroidButton( context, andButtonObj));
         }
 
        for(int i = 0; i < content.buttons.size(); i++)
@@ -112,9 +122,9 @@ public class Pages
         }
 
         for(int i = 0; i < content.timers.size(); i++)
-    {
-        timers.add( new Timer(context, content.timers.get(i)) );
-    }
+        {
+            timers.add( new Timer(context, content.timers.get(i)) );
+        }
 
         for(int i = 0; i < content.animators.size(); i++)
         {
@@ -126,7 +136,7 @@ public class Pages
 
 
        // texture = new Texture(context, TextureHelper.loadTexture(context, R.drawable.sq_start_display), R.drawable.start_display, 0.5f, 0.2f);
-        //Log.e("number of drawable", "start_page:" + R.drawable.sq_start_display);
+        //Log.e("number of drawable", "Workout:" + R.drawable.sq_start_display);
        // button = new Button(context, 0, 0.3f, 0.2f, 0f, -0.5f);
         touchpoint = new Touch_point_parser(0f,0f);
         once = false;
@@ -170,18 +180,18 @@ public class Pages
 
         for(int i = 0; i < textures.size(); i++)
         {
-            //Log.e("class:Pages","draw x_pos: " + content.images.get(i).get_pos_x()   );
-            textures.get(i).draw(MatrixHelper.move_rot_objects(m,1.0f, content.images.get(i).get_pos_x(), content.images.get(i).get_pos_y(),0f));
+            //Log.e("class:Page","draw x_pos: " + content.images.get(i).get_pos_x()   );
+            textures.get(i).draw( MatrixHelper.move_rot_objects(m,1.0f, content.images.get(i).get_pos_x(), content.images.get(i).get_pos_y(),0f));
         }
 
         for(int i = 0; i < buttons.size(); i++)
         {
-            buttons.get(i).draw_button(MatrixHelper.move_rot_objects(m,1.0f, content.buttons.get(i).get_pos_x(), content.buttons.get(i).get_pos_y(),0f));
+            buttons.get(i).draw_button( MatrixHelper.move_rot_objects(m,1.0f, content.buttons.get(i).get_pos_x(), content.buttons.get(i).get_pos_y(),0f));
         }
 
         for(int i = 0; i < timers.size(); i++)
         {
-            timers.get(i).draw_timer(MatrixHelper.move_rot_objects(m,1.0f, content.timers.get(i).get_pos_x(), content.timers.get(i).get_pos_y(),0f));
+            timers.get(i).draw_timer( MatrixHelper.move_rot_objects(m,1.0f, content.timers.get(i).get_pos_x(), content.timers.get(i).get_pos_y(),0f));
         }
 
 
@@ -191,7 +201,7 @@ public class Pages
 
     public void update_input(Touch_point_parser touch_point)
     {
-        //Log.e("star_page update:", "x:" + touch_point.get_x()); Log.e("start_page update:", "y:" + touch_point.get_y());
+        //Log.e("star_page update:", "x:" + touch_point.get_x()); Log.e("Workout update:", "y:" + touch_point.get_y());
         touchpoint.set_x(touch_point.get_x());
         touchpoint.set_y(touch_point.get_y());
 
@@ -209,7 +219,9 @@ public class Pages
 
         for(int i = 0; i < buttons.size(); i++)
         {
-            if (buttons.get(i).activated && !once) {startTime = System.currentTimeMillis(); once = true;}
+            if (buttons.get(i).activated && !once) {
+                startTime = System.currentTimeMillis(); once = true;
+            }
             if(buttons.get(i).activated)
             {
                 endTime = System.currentTimeMillis();
