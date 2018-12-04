@@ -62,7 +62,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private Context context;
 
-    // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
+    // mMVPMatrix is an abbreviation for "Model_Object View Projection Matrix"
     private  float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];

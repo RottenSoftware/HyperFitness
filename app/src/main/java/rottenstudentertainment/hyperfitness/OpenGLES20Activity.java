@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import rottenstudentertainment.hyperfitness.AdMob.AdMob;
+import rottenstudentertainment.hyperfitness.serialize.Serializetest;
 import rottenstudentertainment.hyperfitness.test.Page_number;
 
 public class OpenGLES20Activity extends Activity {
@@ -31,6 +32,8 @@ public class OpenGLES20Activity extends Activity {
             Page_number.set_i(resume_page);
             Log.e("openglesactivity", "restored state: resume_page: " + resume_page);
         }
+
+        Serializetest.doTest( this);
 
         mGLView = new MyGLSurfaceView(this);
         //setContentView(mGLView);

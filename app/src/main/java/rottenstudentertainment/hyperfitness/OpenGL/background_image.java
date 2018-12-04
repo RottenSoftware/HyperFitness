@@ -127,7 +127,7 @@ public class background_image
     /**
      * Encapsulates the OpenGL ES instructions for drawing this shape.
      *
-     * @param mvpMatrix - The Model View Project matrix in which to draw
+     * @param mvpMatrix - The Model_Object View Project matrix in which to draw
      * this shape.
      */
     public void draw_background() {

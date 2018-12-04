@@ -1,0 +1,14 @@
+<workout>
+   <level>0</level>
+   <title>Erstes Hyper Fitness Workout</title>
+   <description>Bring deinen Koerper in Topform!</description>
+   <models>
+		<Model_Object>
+			<texture_names>
+				<String>modell_UVs_brown</String>
+			</texture_names>
+			<model_name>decimate_gemometry_06_mesh</model_name>
+			<bones_name>decimate_gemometry_06_bones</bones_name>
+		</Model_Object>
+   </models>
+</workout>
