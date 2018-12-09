@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">hyperFitness</string>
     <string name="container">view_container</string>
+
+    <!-- Workout suche-->
+    <string name="workout_list">workout_list</string>
+    <string name="workout_header">workout_header</string>
+    <string name="search_title">Workouts</string>
+	
+	<!-- Workout List-->
+	<string name="workout_entry">Entry</string>
 </resources>

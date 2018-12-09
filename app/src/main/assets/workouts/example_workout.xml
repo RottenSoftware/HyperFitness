@@ -1,8 +1,14 @@
 <workout>
-   <level>0</level>
-   <title>Erstes Hyper Fitness Workout</title>
-   <description>Bring deinen Koerper in Topform!</description>
-   <models>
+	<level>0</level>
+	<title>
+		<text>
+			<de>Erstes Hyper Fitness Workout</de>
+			<en>Hello</en>
+			<es>Hola</es>
+		</text>
+	</title>
+	<description>Bring deinen Koerper in Topform!</description>
+	<models>
 		<Model_Object>
 			<texture_names>
 				<String>modell_UVs_brown</String>
@@ -10,5 +16,13 @@
 			<model_name>decimate_gemometry_06_mesh</model_name>
 			<bones_name>decimate_gemometry_06_bones</bones_name>
 		</Model_Object>
-   </models>
+	</models>
+	<pages>
+		<Page>
+			<title>Hampelmänner âáß ñ中国</title>
+			<workout_speed>1.0f</workout_speed>
+			<reps>5</reps>
+			<keyframes>decimate_gemometry_06_keyframes</keyframes>
+		</Page>
+	</pages>
 </workout>

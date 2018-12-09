@@ -4,7 +4,7 @@ import java.util.List;
 
 import rottenstudentertainment.hyperfitness.new_animation.Static_Object;
 
-public class Page_Objects {
+public class Page_Object {
     Hints hints;
     List<AndroidButton_Object> androidbutton_objects;
     List<Timer_Object> timer;
