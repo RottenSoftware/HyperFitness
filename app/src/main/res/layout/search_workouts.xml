@@ -28,6 +28,10 @@
         >
     </RelativeLayout>
     <!-- Workout List-->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -36,35 +40,11 @@
         android:id="@+id/workout_list"
         >
         <!-- Workouts-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/hyperDarkGreen"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/workout_entry"
-                    android:textAllCaps="true"
-                    android:textSize="36sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/hyperDarkGreen"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/workout_entry"
-                android:textAllCaps="true"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+
 
 
     </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

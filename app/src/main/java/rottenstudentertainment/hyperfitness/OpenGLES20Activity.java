@@ -7,8 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import rottenstudentertainment.hyperfitness.AdMob.AdMob;
+import rottenstudentertainment.hyperfitness.Logic.SearchWorkouts;
+import rottenstudentertainment.hyperfitness.globals.Globals;
+import rottenstudentertainment.hyperfitness.globals.Logger;
 import rottenstudentertainment.hyperfitness.serialize.Serializetest;
 import rottenstudentertainment.hyperfitness.test.Page_number;
 
@@ -30,20 +40,14 @@ public class OpenGLES20Activity extends Activity {
         {
             resume_page = savedInstanceState.getInt("resume_page");
             Page_number.set_i(resume_page);
-            Log.e("openglesactivity", "restored state: resume_page: " + resume_page);
+            Logger.LogError( "openglesactivity", "restored state: resume_page: " + resume_page);
         }
 
+
+
         Serializetest.doTest( this);
-
-        mGLView = new MyGLSurfaceView(this);
-        //setContentView(mGLView);
-        setContentView( R.layout.app_container);
-        ViewGroup container = (ViewGroup) findViewById( R.id.container);
-        container.addView(mGLView);
-
-        AdMob.initializeAdMob( this);
-        AdMob.loadAdBanner(this);
-
+        //setContentView( R.layout.search_workouts);
+        switchView();
     }
 
 
@@ -69,7 +73,7 @@ public class OpenGLES20Activity extends Activity {
         // If your OpenGL application is memory intensive,
         // you should consider de-allocating objects that
         // consume significant memory here.
-        mGLView.onPause();
+        if(mGLView != null) mGLView.onPause();
     }
 
     @Override
@@ -78,7 +82,7 @@ public class OpenGLES20Activity extends Activity {
         // The following call resumes a paused rendering thread.
         // If you de-allocated graphic objects for onPause()
         // this is a good place to re-allocate them.
-        mGLView.onResume();
+        if(mGLView != null) mGLView.onResume();
     }
 
 
@@ -91,6 +95,26 @@ public class OpenGLES20Activity extends Activity {
         } else {    // this guy is serious
             // clean up
             super.onBackPressed();       // bye
+        }
+    }
+
+
+    public void switchView(){
+        mGLView = null;
+        if ( Globals.curView == 1) {
+            setContentView( R.layout.search_workouts);
+            SearchWorkouts.initSearchWorkouts( this);
+        } else if(Globals.curView == 2){
+            setContentView( R.layout.inspect_workout);
+        } else if(Globals.curView == 3){
+            setContentView( R.layout.app_container);
+            //seperate Fkt!!
+            mGLView = new MyGLSurfaceView(this);
+            ViewGroup container = (ViewGroup) findViewById( R.id.container);
+            container.addView(mGLView);
+
+            AdMob.initializeAdMob( this);
+            AdMob.loadAdBanner(this);
         }
     }
 

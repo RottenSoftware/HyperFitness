@@ -8,5 +8,9 @@
     <string name="search_title">Workouts</string>
 	
 	<!-- Workout List-->
+    <string name="by">by</string>
+
+    <!-- Workout List Test-->
 	<string name="workout_entry">Entry</string>
+    <string name="sec_workout_entry">Entry 2</string>
 </resources>

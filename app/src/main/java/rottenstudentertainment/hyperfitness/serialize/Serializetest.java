@@ -1,13 +1,10 @@
 package rottenstudentertainment.hyperfitness.serialize;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.StringWriter;
 
 import rottenstudentertainment.hyperfitness.Fitness.Workout;
@@ -28,7 +25,7 @@ public class Serializetest {
     public static void doTest( Context context){
         //XmlSerializer xmlSerializer = Xml.newSerializer();
 
-        String xml = TextResourceReader.readTextFromAssets( context, "workouts/example_workout.xml");
+        String xml = TextResourceReader.readTextFromAssets( context, "workouts/Workout number 2__merty__181213__erstes,workout.xml");
         Workout deserialized;
         StringWriter writer = new StringWriter();
         // Deserialize the Person
