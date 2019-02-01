@@ -119,4 +119,13 @@ public class OpenGLES20Activity extends Activity {
     }
 
 
+    public void optionClicked( View v){
+        String filename = SearchWorkouts.getWorkoutFileName( v, this);
+        if( filename == null){
+            Logger.LogError( "optionClicked", "filename == null");
+            return;
+        } else{
+            switchView();
+        }
+    }
 }

@@ -604,7 +604,7 @@ private static int test_for_bone(String line, String[] nameid)
     public static String[] readFilesFromFolder(Context context, String folderName)
     {
         try {
-            String[] workoutList = context.getResources().getAssets().list(folderName);
+            String[] workoutList = context.getResources().getAssets().list( folderName);
             return workoutList;
 
         } catch (IOException e) {

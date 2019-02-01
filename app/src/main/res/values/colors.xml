@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="hyperGreen">#33cc33</color>
+    <color name="hyperGreen">#0edc18</color>
 	<color name="hyperDarkGreen">#006865</color>
+    <color name="hyperBlue">#0088AA</color>
 </resources>
