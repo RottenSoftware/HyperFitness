@@ -23,6 +23,8 @@ import android.view.MotionEvent;
 import rottenstudentertainment.hyperfitness.user_interface.Rotation_angle;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
 
+import static android.opengl.GLES20.glGenTextures;
+
 /**
  * A view container where OpenGL ES graphics can be drawn on screen.
  * This view can also be used to capture touch events, such as a user
@@ -51,7 +53,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
     private float mPreviousY;
 
     @Override
-    public boolean onTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent( MotionEvent e) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.

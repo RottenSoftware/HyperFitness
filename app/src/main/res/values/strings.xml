@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hyperFitness</string>
+    <string name="app_name">Hyper Fitness</string>
     <string name="container">view_container</string>
 
     <!-- Workout suche-->
@@ -13,4 +13,12 @@
     <!-- Workout List Test-->
 	<string name="workout_entry">Entry</string>
     <string name="sec_workout_entry">Entry 2</string>
+
+
+    <!-- Inpect Workout-->
+    <string name="button_start_workout">Start Workout</string>
+
+    <!-- Workout Page-->
+    <string name="button_skip">Skip</string>
+
 </resources>

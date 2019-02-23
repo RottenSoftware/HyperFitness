@@ -16,7 +16,7 @@ public class Fast_Anim_Object
     private String keyframes_name;
     private String texture_name;
 
-    public Fast_Anim_Object(float width, float height, float pos_x, float pos_y, String mesh_name, String bones_name, String keyframes_name, String texture_name)
+    public Fast_Anim_Object( float width, float height, float pos_x, float pos_y, String mesh_name, String bones_name, String keyframes_name, String texture_name)
     {
         this.height = height;
         this.width = width;

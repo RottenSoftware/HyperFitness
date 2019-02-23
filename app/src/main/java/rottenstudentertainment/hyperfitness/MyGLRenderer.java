@@ -79,7 +79,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Framerate_display framerate_display;
 
 
-    public MyGLRenderer(Context context)
+    public MyGLRenderer( Context context)
     {
         this.context = context;
     }
@@ -147,9 +147,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(shit, 0, m_buffer, 0,scalem, 0);
 
 
-        workout.update_input(touch_point_parser);
+        workout.update_input( touch_point_parser);
 
-        workout.draw_page(ortho_Matrix, mMVPMatrix);
+        workout.draw_page( ortho_Matrix, mMVPMatrix);
 
         long endTime = System.currentTimeMillis(); // end of frame time
         long dt =  (endTime - startTime);  // length of frame time
@@ -184,7 +184,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 
 
-        mMVPMatrix = MatrixHelper.move_rotate_scale_matrix(mMVPMatrix, 0.15f, 0f,-0.7f,2f,90f,0f,180f);
+        mMVPMatrix = MatrixHelper.move_rotate_scale_matrix( mMVPMatrix, 0.15f, 0f,-0.7f,2f,90f,0f,180f);
 
     }
 

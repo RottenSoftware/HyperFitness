@@ -136,7 +136,7 @@ public class Page_Content
                     }
                     else if (type_data[i].equals(fast_anim_tag))
                     {
-                        // static objects like trees or whatever
+                        //
                         Fast_Anim_Object fast_anim_object = new Fast_Anim_Object((float) Float.parseFloat(type_data[i+1]), (float) Float.parseFloat(type_data[i+2]), (float) Float.parseFloat(type_data[i+3]), (float) Float.parseFloat(type_data[i+4]), type_data[i+5], type_data[i+6], type_data[i+7], type_data[i+8] );
                         fast_anims.add(fast_anim_object);
                     }

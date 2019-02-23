@@ -96,7 +96,6 @@ public class TextureHelper
 
         //final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId, options);
         Bitmap bitmap = null;
-
         try {
             InputStream bit=context.getAssets().open(file_path);
             bitmap = BitmapFactory.decodeStream(bit);
@@ -116,9 +115,6 @@ public class TextureHelper
             }
             e1.printStackTrace();
         }
-
-
-
         glBindTexture(GL_TEXTURE_2D, textureObjectIds[0]);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);

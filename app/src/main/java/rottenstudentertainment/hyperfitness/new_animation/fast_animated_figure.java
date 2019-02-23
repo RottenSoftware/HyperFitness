@@ -79,17 +79,25 @@ public class fast_animated_figure
 
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
-
-    public fast_animated_figure(Context context, String mesh_file, String bones_file, String keyframes_file, String texture_file)
-    {
+    /*
+    public fast_animated_figure( Context context, String mesh_file, String bones_file, String keyframes_file, String texture_file){
         mesh = Extract_mesh_bones_keyframes.read_in_mesh_binary( context, mesh_file);
         //Log.e("fast_animated", "successfully loaded: mesh");
         bones = Extract_mesh_bones_keyframes.read_in_bones_binary( context, bones_file); //bones - skeleton
         //Log.e("fast_animated", "successfully loaded: bones");
+        texture_file = "3d/textures/" + texture_file + ".png";
+        texture = TextureHelper.loadAssetTexture(context, texture_file);
+    }
+    */
+
+    public fast_animated_figure( Context context, Model model, String keyframes_file) {
+        mesh = model.mesh;
+        bones = model.bones;
+        texture = model.texture;
         motion_keyframe = Extract_mesh_bones_keyframes.read_in_keyframes_binary( context, keyframes_file); //import poses
         //Log.e("fast_animated", "successfully loaded: keyframe");
 
-        animator = new Animator( motion_keyframe.get_time_stamps(), motion_keyframe.getLocal_keyframes_2d(), bones.get_structure() );
+        animator = new Animator( motion_keyframe.get_time_stamps(), motion_keyframe.getLocal_keyframes_2d(), bones.get_structure());
 
         vertex_count = mesh.get_vertices().length;
 
@@ -98,8 +106,7 @@ public class fast_animated_figure
         weightBuffer = (FloatBuffer) DataBuffer.setBuffer( mesh.get_skin_weights_vec3());
         textureBuffer = (FloatBuffer) DataBuffer.setBuffer( mesh.get_tex());
 
-        texture_file = "3d/textures/" + texture_file + ".png";
-        texture = TextureHelper.loadAssetTexture(context, texture_file);
+
 
         // initialize short buffer for bone indices
         boneIndicesBuffer = (ShortBuffer) DataBuffer.setBuffer( mesh.get_skin_incdices_vec3());

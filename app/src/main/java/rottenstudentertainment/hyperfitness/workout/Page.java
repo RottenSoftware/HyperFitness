@@ -9,6 +9,7 @@ import rottenstudentertainment.hyperfitness.animation.animated_figure;
 import rottenstudentertainment.hyperfitness.new_animation.Animator;
 import rottenstudentertainment.hyperfitness.new_animation.Bones;
 import rottenstudentertainment.hyperfitness.new_animation.Extract_mesh_bones_keyframes;
+import rottenstudentertainment.hyperfitness.new_animation.Model;
 import rottenstudentertainment.hyperfitness.new_animation.Motion_Keyframe;
 import rottenstudentertainment.hyperfitness.new_animation.Static_Object;
 import rottenstudentertainment.hyperfitness.new_animation.fast_animated_figure;
@@ -22,6 +23,7 @@ import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
 import rottenstudentertainment.hyperfitness.workout.page_objects.AndroidButton_Object;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.opengl.GLES20.GL_DEPTH_TEST;
 import static android.opengl.GLES20.glDisable;
@@ -44,8 +46,8 @@ public class Page
     private long endTime;
     private long startTime;
     private boolean once;
-    private Page_Content content;
-
+    private rottenstudentertainment.hyperfitness.Fitness.Page curPage;
+    private Model model;
 
     private ArrayList<Texture> textures;
     private ArrayList<Button> buttons;
@@ -60,11 +62,11 @@ public class Page
 
     private ArrayList<Static_Object> statics;
 
-    public Page(Context context, Page_Content content)
-    {
+    public Page( Context context, Model model, rottenstudentertainment.hyperfitness.Fitness.Page curPage){
         this.context = context;
-        this.content = content;
-
+        this.curPage = curPage;
+        this.model = model;
+        model.genTexture(context);
 
         //ui
         textures = new ArrayList<>();
@@ -77,55 +79,63 @@ public class Page
         animations = new ArrayList<>();
         statics = new ArrayList<>();
 
+        //put model
         fast_animations = new ArrayList<>();
+        fast_animations.add( new fast_animated_figure(context, model, curPage.keyframes));
 
         animator = new ArrayList<>();
 
 
         //load all textures from text file demand
-        for(int i = 0; i < content.images.size(); i++)
+        /*
+        for( int i = 0; i < content.images.size(); i++)
         {
             textures.add( new Texture(context, TextureHelper.loadTexture(context,
                     Accessor.all_resource_ints( content.images.get(i).get_name() ) ), R.drawable.start_display , content.images.get(i).get_width(), content.images.get(i).get_height() ) );
            // Log.e("after", "in");
         }
-
+        */
+/*
         for(int i = 0; i < content.androidButtons.size(); i++)
         {
             AndroidButton_Object  andButtonObj = content.androidButtons.get(i);
             androidButtons.add( new AndroidButton( context, andButtonObj));
         }
-
+*/
+/*
        for(int i = 0; i < content.buttons.size(); i++)
         {
             buttons.add( new Button(context, TextureHelper.loadTexture(context,
                     R.drawable.sq_start_display),
                     content.buttons.get(i).get_width(), content.buttons.get(i).get_height(), content.buttons.get(i).get_pos_x() , content.buttons.get(i).get_pos_y() ));
         }
-
+*/
+/*
         for(int i = 0; i < content.animations.size(); i++)
         {
             animations.add( new animated_figure(context, Accessor.all_resource_ints( content.animations.get(i).get_file_name() ), content.animations.get(i).get_width()) );
         }
-
-
+*/
+/*
         for(int i = 0; i < content.fast_anims.size(); i++)
         {
             fast_animations.add( new fast_animated_figure(context, content.fast_anims.get(i).get_mesh_name(), content.fast_anims.get(i).get_bones_name(), content.fast_anims.get(i).get_keyframes_name(), content.fast_anims.get(i).get_texture_name()));
         }
+*/
 
-
-
+/*
         for(int i = 0; i < content.statics.size(); i++)
         {
             statics.add( new Static_Object(context, Accessor.all_resource_ints( content.statics.get(i).get_file_name() ), "model_texture") );
         }
-
+*/
+        /*
         for(int i = 0; i < content.timers.size(); i++)
         {
             timers.add( new Timer(context, content.timers.get(i)) );
         }
-
+        */
+/*
         for(int i = 0; i < content.animators.size(); i++)
         {
             Bones bones = Extract_mesh_bones_keyframes.read_in_bones_binary(context,  content.animators.get(i).get_bones());
@@ -133,7 +143,7 @@ public class Page
 
             animator.add( new Animator( keyframe.get_time_stamps(), keyframe.getLocal_keyframes_2d(), bones.get_structure() ) );
         }
-
+*/
 
        // texture = new Texture(context, TextureHelper.loadTexture(context, R.drawable.sq_start_display), R.drawable.start_display, 0.5f, 0.2f);
         //Log.e("number of drawable", "Workout:" + R.drawable.sq_start_display);
@@ -155,12 +165,12 @@ public class Page
 
         for(int i = 0; i < animations.size(); i++)
         {
-            animations.get(i).draw(m3d);
+            animations.get(i).draw( m3d);
         }
 
         for(int i = 0; i < statics.size(); i++)
         {
-            statics.get(i).draw(m3d);
+            statics.get(i).draw( m3d);
         }
 
 
@@ -168,9 +178,6 @@ public class Page
         for(int i = 0; i < fast_animations.size(); i++)
         {
             if(i == 0 && animator.size() > 0) {keyframebuffer = animator.get(0).update_animation();}
-
-
-
             if(animator.size() > 0) fast_animations.get(i).draw(  rot_m3d, keyframebuffer, true); // for synchronized keyframes
             else fast_animations.get(i).draw(rot_m3d, keyframebuffer, false);
         }
@@ -181,17 +188,17 @@ public class Page
         for(int i = 0; i < textures.size(); i++)
         {
             //Log.e("class:Page","draw x_pos: " + content.images.get(i).get_pos_x()   );
-            textures.get(i).draw( MatrixHelper.move_rot_objects(m,1.0f, content.images.get(i).get_pos_x(), content.images.get(i).get_pos_y(),0f));
+            //textures.get(i).draw( MatrixHelper.move_rot_objects(m,1.0f, content.images.get(i).get_pos_x(), content.images.get(i).get_pos_y(),0f));
         }
 
         for(int i = 0; i < buttons.size(); i++)
         {
-            buttons.get(i).draw_button( MatrixHelper.move_rot_objects(m,1.0f, content.buttons.get(i).get_pos_x(), content.buttons.get(i).get_pos_y(),0f));
+            //buttons.get(i).draw_button( MatrixHelper.move_rot_objects(m,1.0f, content.buttons.get(i).get_pos_x(), content.buttons.get(i).get_pos_y(),0f));
         }
 
         for(int i = 0; i < timers.size(); i++)
         {
-            timers.get(i).draw_timer( MatrixHelper.move_rot_objects(m,1.0f, content.timers.get(i).get_pos_x(), content.timers.get(i).get_pos_y(),0f));
+            //timers.get(i).draw_timer( MatrixHelper.move_rot_objects(m,1.0f, content.timers.get(i).get_pos_x(), content.timers.get(i).get_pos_y(),0f));
         }
 
 
@@ -228,8 +235,6 @@ public class Page
                 if( endTime - startTime > 500) return true;
             }
         }
-
-
         return false;
     }
 

@@ -3,10 +3,9 @@ package rottenstudentertainment.hyperfitness.util;
 import android.content.Context;
 import android.widget.Button;
 
-import rottenstudentertainment.hyperfitness.AndroidUtils.ContextUtils;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
-import rottenstudentertainment.hyperfitness.test.Page_number;
-import rottenstudentertainment.hyperfitness.workout.Workout;
+import rottenstudentertainment.hyperfitness.globals.AppState;
+
 
 public class ButtonFunctions {
 
@@ -21,6 +20,6 @@ public class ButtonFunctions {
 
     public static void go( Context context, Button button){
         //change button color + wait half a second
-        Page_number.next_page();
+        AppState.next_page( (OpenGLES20Activity) context);
     }
 }

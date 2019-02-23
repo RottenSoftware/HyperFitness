@@ -3,10 +3,12 @@ package rottenstudentertainment.hyperfitness.workout;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rottenstudentertainment.hyperfitness.OpenGL.background_image;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
-import rottenstudentertainment.hyperfitness.test.Page_number;
+import rottenstudentertainment.hyperfitness.globals.AppState;
+import rottenstudentertainment.hyperfitness.new_animation.Model;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
 
 
@@ -18,6 +20,7 @@ import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
 public class Workout
 {
     private Context context;
+    private Model model;
     private Touch_point_parser touchpoint;
     private Page page;
     private ArrayList<Page_Content> content;
@@ -25,8 +28,7 @@ public class Workout
 
     private background_image background;
 
-    private  ArrayList<String> file_names;
-    Page_Content page_content;
+    private List<rottenstudentertainment.hyperfitness.Fitness.Page> pages;
     private int i;
 
     //MediaPlayer testplayer;
@@ -36,35 +38,22 @@ public class Workout
         this.context = context;
         touchpoint = new Touch_point_parser(0f,0f);
         i = OpenGLES20Activity.resume_page;
-
         background = new background_image(context, "background/images/background_green_11.png");
-
+        model = ((OpenGLES20Activity) context).workoutWrapper.model;
 
     //testplayer = MediaPlayer.create(context, R.raw.wayne);
     //testplayer.start();
 
+        //model + bones laden + seiten übergeben
+        pages = ((OpenGLES20Activity) context).workoutWrapper.workout.pages;
 
-        file_names = new ArrayList<>();
-        file_names.add("testpage");
-        file_names.add("testpage2");
-        file_names.add("testpage3");
-        file_names.add("testpage4");
-        file_names.add("testpage5");
-        file_names.add("testpage6");
-
-
-
-
-        page_content = new Page_Content(context, file_names.get(i));
+        //page_content = new Page_Content( context, file_names.get(i));
 
         content = new ArrayList<>();
 
         //content.add( new Page_Content(Page_reader.page_reader(context, "testpage")) );
         //content.add( new Page_Content(Page_reader.page_reader(context, "testpage2") ) );
-
-
-
-        page = new Page(context, page_content);
+        page = new Page( context, model, pages.get( i));  //anpassen für xml variante
 
         //Log.e("start_page", "start_page: content 0 button size  :" + content.get(0).buttons.size());
         //Log.e("start_page", "from assets  :" + TextResourceReader.readTextFromAssets(context, "stuff/more_stuff/animation_vertex_shader.glsl"));
@@ -91,15 +80,12 @@ public class Workout
 
     private void set_page()
     {
-        if(i != Page_number.get_page() )
+        if( i != AppState.get_page() )
         {
-            i = Page_number.get_page();
-            page = new Page(context, new Page_Content( context, file_names.get(i)));
+            i = AppState.get_page();
+            page = new Page(context, model, pages.get( i));
         }
-        else if(i == file_names.size()) System.exit(1);
-        else if( i > Page_number.get_page() ){
 
-        }
         /*
         else if(page.status() && i < file_names.size()-1)
         {
