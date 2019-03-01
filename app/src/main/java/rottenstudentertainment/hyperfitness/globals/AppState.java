@@ -38,6 +38,17 @@ public class AppState
         }
     }
 
+    public static void next_page_forUI(final OpenGLES20Activity activity){
+        activity.runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        next_page( activity);
+                    }
+                }
+        );
+    }
+
     public static boolean backPress(OpenGLES20Activity activity) {
         if( curView.equals( CurView.DOING_WORKOUT)){
             if( pageNumber == 0){

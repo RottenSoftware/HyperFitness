@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import rottenstudentertainment.hyperfitness.AdMob.AdMob;
 import rottenstudentertainment.hyperfitness.Fitness.WorkoutWrapper;
 import rottenstudentertainment.hyperfitness.Logic.DoingWorkout;
+import rottenstudentertainment.hyperfitness.Logic.InspectWorkout;
 import rottenstudentertainment.hyperfitness.Logic.SearchWorkouts;
 import rottenstudentertainment.hyperfitness.globals.AppState;
 import rottenstudentertainment.hyperfitness.globals.CurView;
@@ -93,13 +94,10 @@ public class OpenGLES20Activity extends Activity {
             SearchWorkouts.initSearchWorkouts( this);
         } else if( AppState.curView.equals( CurView.INSPECT_WORKOUT)){
             setContentView( R.layout.inspect_workout);
+            InspectWorkout.initInspectWorkout( this);
         } else if( AppState.curView.equals( CurView.DOING_WORKOUT)){
             setContentView( R.layout.app_container);
-            DoingWorkout.initDoingWorkout(this);
-            //seperate Fkt!!
-            //mGLView = new MyGLSurfaceView(this);
-            ViewGroup container = (ViewGroup) findViewById( R.id.container);
-            container.addView( mGLView);
+            DoingWorkout.initDoingWorkout(this, mGLView);
 
             AdMob.initializeAdMob( this);
             AdMob.loadAdBanner(this);

@@ -14,11 +14,11 @@ public class Text {
         if(locale.equals("en") || locale.contains("en_")){
             if( en != null)return en;
         } else if ( locale.equals("de") || locale.contains("de_")){
-            if( en != null)return de;
+            if( de != null)return de;
         } else if ( locale.equals("es") || locale.contains("es_")){
-            if( en != null)return es;
+            if( es != null)return es;
         } else if ( locale.equals("zh") || locale.contains("zh_")){
-            if( en != null)return zh;
+            if( zh != null)return zh;
         }
         return en;
     }

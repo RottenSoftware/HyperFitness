@@ -67,8 +67,7 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:layout_gravity="center"
-        android:onClick="buttonClicked"
-/>
+        android:onClick="buttonClicked" />
 </LinearLayout>
 
 

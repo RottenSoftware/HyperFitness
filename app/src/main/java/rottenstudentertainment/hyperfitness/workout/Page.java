@@ -2,10 +2,13 @@ package rottenstudentertainment.hyperfitness.workout;
 
 import android.content.Context;
 
+import rottenstudentertainment.hyperfitness.Logic.DoingWorkout;
+import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.Texture;
 import rottenstudentertainment.hyperfitness.TextureHelper;
 import rottenstudentertainment.hyperfitness.animation.animated_figure;
+import rottenstudentertainment.hyperfitness.globals.AppState;
 import rottenstudentertainment.hyperfitness.new_animation.Animator;
 import rottenstudentertainment.hyperfitness.new_animation.Bones;
 import rottenstudentertainment.hyperfitness.new_animation.Extract_mesh_bones_keyframes;
@@ -85,6 +88,7 @@ public class Page
 
         animator = new ArrayList<>();
 
+        DoingWorkout.setTitle( (OpenGLES20Activity) context, curPage);
 
         //load all textures from text file demand
         /*
@@ -129,12 +133,12 @@ public class Page
             statics.add( new Static_Object(context, Accessor.all_resource_ints( content.statics.get(i).get_file_name() ), "model_texture") );
         }
 */
-        /*
-        for(int i = 0; i < content.timers.size(); i++)
-        {
-            timers.add( new Timer(context, content.timers.get(i)) );
+
+        if( curPage.timer != null){
+            int startTime = curPage.timer.time;
+            timers.add( new Timer(context, startTime));
         }
-        */
+
 /*
         for(int i = 0; i < content.animators.size(); i++)
         {
@@ -198,12 +202,12 @@ public class Page
 
         for(int i = 0; i < timers.size(); i++)
         {
-            //timers.get(i).draw_timer( MatrixHelper.move_rot_objects(m,1.0f, content.timers.get(i).get_pos_x(), content.timers.get(i).get_pos_y(),0f));
+            Timer timer = timers.get(i);
+            timer.draw_timer( m);
+            if( timer.getTime() == 0){
+                AppState.next_page_forUI( (OpenGLES20Activity) context);
+            }
         }
-
-
-
-
     }
 
     public void update_input(Touch_point_parser touch_point)
