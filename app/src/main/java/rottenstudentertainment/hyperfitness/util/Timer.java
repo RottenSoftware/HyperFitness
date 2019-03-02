@@ -60,11 +60,14 @@ public class Timer
         return curTime;
     }
 
-    public void draw_timer( float[] m)
+    public void draw_timer( float[] m, boolean paused)
     {
         m = MatrixHelper.move_rot_objects( m,1.0f, pos_x, pos_y,0f);
         current_time = System.currentTimeMillis();
-        float elapsed_time =  startTime - (int) (current_time-start_time)/1000f;
+        if( paused){
+            start_time = current_time - curTime;
+        }
+        float elapsed_time =  paused ? curTime : startTime - (int) (current_time-start_time)/1000;
         if(elapsed_time<0) elapsed_time = 0;
         curTime = (int) elapsed_time;
 

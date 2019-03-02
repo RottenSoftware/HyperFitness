@@ -38,5 +38,24 @@ public class DoingWorkout {
 
     }
 
+    public static void setUpExerciseStartQueque(){
+        Thread thread = new Thread( new Runnable() {
+            @Override
+            public void run() {
+               long curTime = System.currentTimeMillis();
+               long endTime = curTime;
+               while( endTime - curTime < 3000){ // three seconds
+                   endTime = System.currentTimeMillis();
+                   try {
+                       Thread.sleep(300);
+                   } catch(Exception e) {
+                   }
+                }
+                rottenstudentertainment.hyperfitness.workout.Page.paused = false;
+            }
+        });
+        thread.start();
+    }
+
 
 }

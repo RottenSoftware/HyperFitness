@@ -57,6 +57,7 @@ public class Page
     private ArrayList<animated_figure> animations;
     private ArrayList<Timer> timers;
     private ArrayList<AndroidButton> androidButtons;
+    public static boolean paused = true;
 
     private ArrayList<Animator> animator;
 
@@ -69,6 +70,7 @@ public class Page
         this.context = context;
         this.curPage = curPage;
         this.model = model;
+        paused = true;
         model.genTexture(context);
 
         //ui
@@ -89,7 +91,7 @@ public class Page
         animator = new ArrayList<>();
 
         DoingWorkout.setTitle( (OpenGLES20Activity) context, curPage);
-
+        DoingWorkout.setUpExerciseStartQueque();
         //load all textures from text file demand
         /*
         for( int i = 0; i < content.images.size(); i++)
@@ -203,7 +205,7 @@ public class Page
         for(int i = 0; i < timers.size(); i++)
         {
             Timer timer = timers.get(i);
-            timer.draw_timer( m);
+            timer.draw_timer( m, paused);
             if( timer.getTime() == 0){
                 AppState.next_page_forUI( (OpenGLES20Activity) context);
             }
