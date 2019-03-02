@@ -11,6 +11,7 @@ import rottenstudentertainment.hyperfitness.Fitness.Page;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.Runnables.SetExerciseTitleRunnable;
+import rottenstudentertainment.hyperfitness.globals.Globals;
 import rottenstudentertainment.hyperfitness.workout.PageDisplayer;
 
 public class DoingWorkout {
@@ -32,13 +33,13 @@ public class DoingWorkout {
 
     }
 
-    public static void setUpExerciseStartQueque(){
+    public static void setUpExerciseStartQueque( ){
         Thread thread = new Thread( new Runnable() {
             @Override
             public void run() {
                long curTime = System.currentTimeMillis();
                long endTime = curTime;
-               while( endTime - curTime < 3000){ // three seconds
+               while( endTime - curTime < Globals.timeBetweenExecises){ // three seconds
                    endTime = System.currentTimeMillis();
                    try {
                        Thread.sleep(300);

@@ -167,7 +167,7 @@ public class PageDisplayer
         float[] keyframebuffer = new float[16];
         for(int i = 0; i < fast_animations.size(); i++)
         {
-            if(i == 0 && animator.size() > 0) {keyframebuffer = animator.get(0).update_animation();}
+            if(i == 0 && animator.size() > 0) {keyframebuffer = animator.get(0).update_animation( paused);}
             if(animator.size() > 0) fast_animations.get(i).draw(  rot_m3d, keyframebuffer, true); // for synchronized keyframes
             else fast_animations.get(i).draw(rot_m3d, keyframebuffer, false);
         }

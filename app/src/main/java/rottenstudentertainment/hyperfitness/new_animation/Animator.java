@@ -17,12 +17,13 @@ import static android.os.SystemClock.elapsedRealtime;
 
 public class Animator
 {
-    private  float[] timestamps;
-    private  float[][] local_keyframes_2d;
-    private  float start_time;
-    private  float[] global_fused_keyframes;
-    private  float[] local_fused_keyframes;
-    private  Vector <Vector<Integer>> bones_structure;
+    private float[] timestamps;
+    private float[][] local_keyframes_2d;
+    private float start_time;
+    private float curTime;
+    private float[] global_fused_keyframes;
+    private float[] local_fused_keyframes;
+    private Vector <Vector<Integer>> bones_structure;
 
 
     public Animator(float[] timestamps, float[][] local_keyframess_2d, Vector <Vector<Integer>> bones_structure)
@@ -33,14 +34,15 @@ public class Animator
         this.local_keyframes_2d =local_keyframess_2d;
 
         //Log.e("", "" + local_keyframes_2d.length);
-        start_time= elapsedRealtime();
+        start_time = elapsedRealtime();
 
         //preserve room for global matrices
         global_fused_keyframes = new float[local_keyframes_2d[0].length];
         local_fused_keyframes = new float[local_keyframes_2d[0].length];
 
         this.bones_structure = bones_structure;
-
+        calcFusedGlobals( 0f,0);  //setfirstpose
+        //erste keyframe zu global keyframe
 
     }
 
@@ -66,11 +68,17 @@ public class Animator
         return new_matrix;
     }
 
-    public float[] update_animation()
-    {
+    public float[] update_animation( boolean paused) {
         float motion_speed = 1000.0f;
-        float time = (elapsedRealtime() - start_time);
-        while(time > timestamps[timestamps.length-1]*motion_speed) {time -= timestamps[timestamps.length-1]*motion_speed; start_time = elapsedRealtime();}
+        if( paused){ // warten vorm workout/ mögliche pause
+            start_time = elapsedRealtime() -curTime;
+            return global_fused_keyframes;
+        }
+        curTime = ( elapsedRealtime() - start_time);
+        while( curTime > timestamps[ timestamps.length-1]*motion_speed){
+            curTime -= timestamps[ timestamps.length-1]*motion_speed;
+            start_time = elapsedRealtime();
+        }
         //find the two keyframes that have to be merged and calculate the time progress between them
         //Log.e("time testing", "time :" + time);
        // for (int i = 0; i < timestamps.length; i++) Log.e("time testing", "timestamp " + i + " : " + timestamps[i]*motion_speed);
@@ -79,28 +87,26 @@ public class Animator
         for(int p = 0; p < timestamps.length; p++)
         {
             //Log.e("time testing", "timestamp " + p + " : " + timestamps[p]*motion_speed);
-            if( time < timestamps[p]* motion_speed)
+            if( curTime < timestamps[p]* motion_speed)
             {
                 //Log.e("inside if statement", "check");
                 first_frame = p-1;
-                progress = (time - timestamps[p-1] * motion_speed ) / ((timestamps[p] - timestamps[p-1]) * motion_speed);
+                progress = (curTime - timestamps[p-1] * motion_speed ) / ((timestamps[p] - timestamps[p-1]) * motion_speed);
                 break;
             }
         }
         //Log.e("progress testing", "progress :" + progress + "first_frame " + first_frame );
-
-        //static testing-------
-//        progress = 0.5f;
-//        first_frame=0;
         //---------
-        for(int i = 0; i < local_fused_keyframes.length/16; i++)
-        {
-            insert_matrix(fuse_locals(progress, extract_matrix(local_keyframes_2d[first_frame], i), extract_matrix(local_keyframes_2d[first_frame +1], i)) ,i);
-        }
-
-        local_to_global();
+        calcFusedGlobals( progress, first_frame);
         MatrixHelper.matrix_printer(global_fused_keyframes);
         return global_fused_keyframes;
+    }
+
+    private void calcFusedGlobals( float progress, int first_frame){
+        for( int i = 0; i < local_fused_keyframes.length/16; i++){
+            insert_matrix( fuse_locals(progress, extract_matrix(local_keyframes_2d[first_frame], i), extract_matrix(local_keyframes_2d[first_frame +1], i)) ,i);
+        }
+        local_to_global();
     }
 
     public void local_to_global()

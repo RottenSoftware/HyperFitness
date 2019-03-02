@@ -29,6 +29,7 @@ import static android.opengl.GLES20.glGetUniformLocation;
 import static android.opengl.GLES20.glUniform1i;
 import static rottenstudentertainment.hyperfitness.OpenGL.Program.createAndLinkProgram;
 import static rottenstudentertainment.hyperfitness.globals.Globals.useLightning;
+import static rottenstudentertainment.hyperfitness.workout.PageDisplayer.paused;
 
 
 /**
@@ -90,7 +91,7 @@ public class Animated_Figure
     }
     */
 
-    public Animated_Figure(Context context, Model model, String keyframes_file) {
+    public Animated_Figure( Context context, Model model, String keyframes_file) {
         mesh = model.mesh;
         bones = model.bones;
         texture = model.texture;
@@ -203,7 +204,7 @@ public class Animated_Figure
         GLES20.glUniformMatrix4fv(mInv_bone_handle, bones.get_invBindMats().length /16, true, bones.get_invBindMats(), 0);
         MyGLRenderer.checkGlError("glUniformMatrix4fv");
 
-        animator.update_animation();
+        animator.update_animation( paused);
 
         // set pose
         mPose_handle = GLES20.glGetUniformLocation(mProgram, "pose");
