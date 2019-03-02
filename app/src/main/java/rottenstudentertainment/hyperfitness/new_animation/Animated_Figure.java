@@ -35,7 +35,7 @@ import static rottenstudentertainment.hyperfitness.globals.Globals.useLightning;
  * Created by Merty on 03.08.2017.
  */
 
-public class fast_animated_figure
+public class Animated_Figure
 {
 
 
@@ -80,7 +80,7 @@ public class fast_animated_figure
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
     /*
-    public fast_animated_figure( Context context, String mesh_file, String bones_file, String keyframes_file, String texture_file){
+    public Animated_Figure( Context context, String mesh_file, String bones_file, String keyframes_file, String texture_file){
         mesh = Extract_mesh_bones_keyframes.read_in_mesh_binary( context, mesh_file);
         //Log.e("fast_animated", "successfully loaded: mesh");
         bones = Extract_mesh_bones_keyframes.read_in_bones_binary( context, bones_file); //bones - skeleton
@@ -90,7 +90,7 @@ public class fast_animated_figure
     }
     */
 
-    public fast_animated_figure( Context context, Model model, String keyframes_file) {
+    public Animated_Figure(Context context, Model model, String keyframes_file) {
         mesh = model.mesh;
         bones = model.bones;
         texture = model.texture;

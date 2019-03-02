@@ -14,7 +14,7 @@ import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
 
 /**
  * Created by Merty on 29.10.2017.
- * Adminitrates Logic and Page
+ * Adminitrates Logic and PageDisplayer
  */
 
 public class Workout
@@ -22,8 +22,7 @@ public class Workout
     private Context context;
     private Model model;
     private Touch_point_parser touchpoint;
-    private Page page;
-    private ArrayList<Page_Content> content;
+    private PageDisplayer pageDisplayer;
 
 
     private background_image background;
@@ -49,11 +48,10 @@ public class Workout
 
         //page_content = new Page_Content( context, file_names.get(i));
 
-        content = new ArrayList<>();
 
         //content.add( new Page_Content(Page_reader.page_reader(context, "testpage")) );
         //content.add( new Page_Content(Page_reader.page_reader(context, "testpage2") ) );
-        page = new Page( context, model, pages.get( i));  //anpassen für xml variante
+        pageDisplayer = new PageDisplayer( context, model, pages.get( i));  //anpassen für xml variante
 
         //Log.e("start_page", "start_page: content 0 button size  :" + content.get(0).buttons.size());
         //Log.e("start_page", "from assets  :" + TextResourceReader.readTextFromAssets(context, "stuff/more_stuff/animation_vertex_shader.glsl"));
@@ -66,7 +64,7 @@ public class Workout
     {
         set_page();
         background.draw_background();
-        page.draw_page(m, m3d);
+        pageDisplayer.draw_page(m, m3d);
 
 
 
@@ -75,7 +73,7 @@ public class Workout
 
     public void update_input(Touch_point_parser touch_point)
     {
-        page.update_input(touch_point);
+        pageDisplayer.update_input(touch_point);
     }
 
     private void set_page()
@@ -83,18 +81,18 @@ public class Workout
         if( i != AppState.get_page() )
         {
             i = AppState.get_page();
-            page = new Page(context, model, pages.get( i));
+            pageDisplayer = new PageDisplayer(context, model, pages.get( i));
         }
 
         /*
-        else if(page.status() && i < file_names.size()-1)
+        else if(pageDisplayer.status() && i < file_names.size()-1)
         {
-            page = new Page(context, new Page_Content( context, file_names.get(++i)));
+            pageDisplayer = new PageDisplayer(context, new Page_Content( context, file_names.get(++i)));
             page_number.set_i(i);
         }
         */
 
-        // set page for saved instance object
+        // set pageDisplayer for saved instance object
         OpenGLES20Activity.resume_page = i;
     }
 

@@ -6,18 +6,12 @@ package rottenstudentertainment.hyperfitness.Logic;
 import android.opengl.GLSurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import java.util.HashMap;
-import java.util.List;
 
 import rottenstudentertainment.hyperfitness.Fitness.Page;
-import rottenstudentertainment.hyperfitness.MyGLSurfaceView;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.Runnables.SetExerciseTitleRunnable;
+import rottenstudentertainment.hyperfitness.workout.PageDisplayer;
 
 public class DoingWorkout {
     public static void initDoingWorkout(OpenGLES20Activity activity, GLSurfaceView mGLView){
@@ -51,7 +45,7 @@ public class DoingWorkout {
                    } catch(Exception e) {
                    }
                 }
-                rottenstudentertainment.hyperfitness.workout.Page.paused = false;
+                PageDisplayer.paused = false;
             }
         });
         thread.start();

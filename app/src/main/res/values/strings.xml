@@ -18,7 +18,7 @@
     <!-- Inpect Workout-->
     <string name="button_start_workout">Start Workout</string>
 
-    <!-- Workout Page-->
+    <!-- Workout PageDisplayer-->
     <string name="button_skip">Skip</string>
 
 </resources>

@@ -21,7 +21,6 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
-import rottenstudentertainment.hyperfitness.animation.animated_figure;
 import rottenstudentertainment.hyperfitness.heightmap.Heightmap;
 import rottenstudentertainment.hyperfitness.util.Framerate_display;
 import rottenstudentertainment.hyperfitness.util.MatrixHelper;
@@ -50,7 +49,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private static final String TAG = "MyGLRenderer";
     //private Sprite_Square sprite_square;
-    private animated_figure anim;
 
     private float[] ortho_Matrix = new float[16];
     private Touch_point_parser touch_point_parser;
