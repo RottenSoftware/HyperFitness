@@ -25,7 +25,6 @@ public class Animator
     private float[] local_fused_keyframes;
     private Vector <Vector<Integer>> bones_structure;
 
-
     public Animator(float[] timestamps, float[][] local_keyframess_2d, Vector <Vector<Integer>> bones_structure)
     {
         //MatrixHelper.matrix_printer(local_keyframess_2d[0]);
@@ -41,12 +40,10 @@ public class Animator
         local_fused_keyframes = new float[local_keyframes_2d[0].length];
 
         this.bones_structure = bones_structure;
-        calcFusedGlobals( 0f,0);  //setfirstpose
+        calcFusedGlobals( 0f,0);  //set first Pose
         //erste keyframe zu global keyframe
 
     }
-
-
 
     public  float[] fuse_locals( float progress, float[] m_one, float[] m_two)
     {

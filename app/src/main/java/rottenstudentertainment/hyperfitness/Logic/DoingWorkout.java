@@ -51,6 +51,4 @@ public class DoingWorkout {
         });
         thread.start();
     }
-
-
 }
