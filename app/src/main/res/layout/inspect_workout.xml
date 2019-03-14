@@ -1,73 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/black"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <LinearLayout
+        android:id="@+id/headerView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/hyperGreen">
+        android:layout_height="50dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:background="@color/hyperGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/workout_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/search_title"
-            android:textAllCaps="true"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:text="Workout"
+            android:textSize="30sp" />
     </LinearLayout>
-    <!-- Border-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        >
-    </RelativeLayout>
 
-    <!-- Description + exercises -->
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:fillViewport="true">
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/hyperBlue"
+        app:layout_constraintBottom_toTopOf="@+id/bottomView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerView">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:id="@+id/workout_list"
-            >
-            <!-- Description -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Test"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-            <!-- generated exerciseInfo -->
+            android:background="@color/hyperBlue"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
 
+            <include layout="@layout/inspect_workout_level" />
+            <include layout="@layout/inspect_workout_description" />
+            <include layout="@layout/inspect_workout_exercises" />
 
         </LinearLayout>
-
     </ScrollView>
 
-    -->
+    <LinearLayout
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:background="@color/hyperGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/start_workout"
-        android:layout_width="240dp"
-        android:layout_height="42dp"
-        android:text="@string/button_start_workout"
-        android:background="@drawable/buttonshape"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_gravity="center"
-        android:onClick="buttonClicked" />
-</LinearLayout>
+        <Button
+            android:id="@+id/start_workout"
+            android:layout_width="240dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
+            android:onClick="buttonClicked"
+            android:text="@string/button_start_workout"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
 
+
+</android.support.constraint.ConstraintLayout>
 

@@ -204,7 +204,7 @@ public class PageDisplayer
 
         for(int i = 0; i < buttons.size(); i++)
         {
-            buttons.get(i).update_button(touchpoint);
+            //buttons.get(i).update_button(touchpoint);
         }
 
         //button.update_button(touchpoint);
@@ -216,6 +216,7 @@ public class PageDisplayer
 
         for(int i = 0; i < buttons.size(); i++)
         {
+            /*
             if (buttons.get(i).activated && !once) {
                 startTime = System.currentTimeMillis(); once = true;
             }
@@ -224,6 +225,7 @@ public class PageDisplayer
                 endTime = System.currentTimeMillis();
                 if( endTime - startTime > 500) return true;
             }
+            */
         }
         return false;
     }

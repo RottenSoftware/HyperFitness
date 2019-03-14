@@ -8,4 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- HyperTableHeaders -->
+    <style name="HyperTableHeaders">
+        <item name="android:textSize">16sp</item>
+        <!--<item name="android:textSize">24sp</item> -->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- HyperTableData -->
+    <style name="HyperTableData">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- HyperTableContentLeftMargin -->
+    <style name="HyperTableContentLeftMargin">
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
 </resources>

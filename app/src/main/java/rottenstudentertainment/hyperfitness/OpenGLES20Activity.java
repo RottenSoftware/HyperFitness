@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 
 import rottenstudentertainment.hyperfitness.AdMob.AdMob;
 import rottenstudentertainment.hyperfitness.Fitness.WorkoutWrapper;
@@ -39,7 +38,7 @@ public class OpenGLES20Activity extends Activity {
             Logger.LogError( "openglesactivity", "restored state: resume_page: " + resume_page);
         }
         mGLView = new MyGLSurfaceView(this);
-        //setContentView( R.layout.search_workouts);
+        Globals.setDebugView( this); // erste seite überschreiben
         switchView();
     }
 

@@ -7,7 +7,6 @@ import android.opengl.Matrix;
 import rottenstudentertainment.hyperfitness.MyGLRenderer;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.TextureHelper;
-import rottenstudentertainment.hyperfitness.util.Accessor;
 import rottenstudentertainment.hyperfitness.util.TextResourceReader;
 
 import java.nio.ByteBuffer;
@@ -76,7 +75,7 @@ public class Static_Object
 
 
 
-        texture = TextureHelper.loadTexture(context, Accessor.all_resource_ints(texture_name));
+        texture = TextureHelper.loadTexture(context, TextureHelper.loadAssetTexture( context, texture_name));
 
         ByteBuffer cc = ByteBuffer.allocateDirect(
                 // (# of coordinate values * 4 bytes per float)

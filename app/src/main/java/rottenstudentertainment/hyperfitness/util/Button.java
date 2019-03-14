@@ -12,6 +12,7 @@ import rottenstudentertainment.hyperfitness.TextureHelper;
 
 public class Button
 {
+    /*
     private Texture texture;
     private Context context;
     private Touch_point_parser touch_point;
@@ -53,4 +54,5 @@ public class Button
     {
         if(touch_point.get_y() < pos_y + height/2 && touch_point.get_y() > pos_y - height/2  && touch_point.get_x() < pos_x + width/2 && touch_point.get_x() > pos_x - width/2  ) activated = true;
     }
+    */
 }
