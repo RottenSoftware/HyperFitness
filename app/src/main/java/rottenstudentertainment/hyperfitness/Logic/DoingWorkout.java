@@ -21,6 +21,7 @@ public class DoingWorkout {
         //mGLView = new MyGLSurfaceView(this);
         ViewGroup container = (ViewGroup) activity.findViewById( R.id.container);
         container.addView( mGLView);
+
         View skipButton =  activity.findViewById( R.id.skipButton);
         skipButton.bringToFront();
         View titleText =  activity.findViewById( R.id.titleText);

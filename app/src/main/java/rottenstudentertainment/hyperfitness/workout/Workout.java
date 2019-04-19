@@ -71,28 +71,16 @@ public class Workout
         //Log.e("start_page", "draw_start_page: i :" + i);
     }
 
-    public void update_input(Touch_point_parser touch_point)
-    {
+    public void update_input(Touch_point_parser touch_point){
         pageDisplayer.update_input(touch_point);
     }
 
     private void set_page()
     {
-        if( i != AppState.get_page() )
-        {
+        if( i != AppState.get_page()){
             i = AppState.get_page();
             pageDisplayer = new PageDisplayer(context, model, pages.get( i));
         }
-
-        /*
-        else if(pageDisplayer.status() && i < file_names.size()-1)
-        {
-            pageDisplayer = new PageDisplayer(context, new Page_Content( context, file_names.get(++i)));
-            page_number.set_i(i);
-        }
-        */
-
-        // set pageDisplayer for saved instance object
         OpenGLES20Activity.resume_page = i;
     }
 

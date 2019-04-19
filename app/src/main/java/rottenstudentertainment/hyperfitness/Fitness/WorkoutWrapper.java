@@ -32,7 +32,8 @@ public class WorkoutWrapper {
         Bones bones = Extract_mesh_bones_keyframes.read_in_bones_binary( context, model_obj.bones_name);
         String texturePath = "3d/textures/" + model_obj.texture_names.get(0) + ".png";
         //int texture = TextureHelper.loadAssetTexture( context, texturePath); only possible in opengl thread ( renderer)
-        model = new Model( mesh, bones, texturePath);
+        String scaleString = model_obj.scale;
+        model = new Model( mesh, scaleString, bones, texturePath);
     }
 
     private Model_Object getModelFilenames(){

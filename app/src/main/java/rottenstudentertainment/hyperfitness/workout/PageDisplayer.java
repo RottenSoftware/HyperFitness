@@ -148,21 +148,13 @@ public class PageDisplayer
 
     public void draw_page(float[] m, float[] m3d)
     {
-
         // 3d stuff
         glEnable(GL_DEPTH_TEST);
-
-
-        //Log.e("pages", "draw: rotation input: " + Rotation_angle.angle);
-
-       float[] rot_m3d = MatrixHelper.move_rotate_scale_matrix(m3d, 1f, 0f, 0f, 0f, 0f, 0f, Rotation_angle.angle);
-
-
+        float[] rot_m3d = MatrixHelper.move_rotate_scale_matrix( m3d, 1f, 0f, 0f, 0f, 0f, 0f, Rotation_angle.angle);
         for(int i = 0; i < statics.size(); i++)
         {
             statics.get(i).draw( m3d);
         }
-
 
         float[] keyframebuffer = new float[16];
         for(int i = 0; i < fast_animations.size(); i++)
@@ -208,28 +200,7 @@ public class PageDisplayer
         }
 
         //button.update_button(touchpoint);
-
     }
-
-    public boolean status()
-    {
-
-        for(int i = 0; i < buttons.size(); i++)
-        {
-            /*
-            if (buttons.get(i).activated && !once) {
-                startTime = System.currentTimeMillis(); once = true;
-            }
-            if(buttons.get(i).activated)
-            {
-                endTime = System.currentTimeMillis();
-                if( endTime - startTime > 500) return true;
-            }
-            */
-        }
-        return false;
-    }
-
 }
 
 

@@ -17,9 +17,9 @@ import static android.os.SystemClock.elapsedRealtime;
 
 public class Animator
 {
-    private float[] timestamps;
+    private float[] timestamps; //seconds
     private float[][] local_keyframes_2d;
-    private float start_time;
+    private float start_time; //milliseconds
     private float curTime;
     private float[] global_fused_keyframes;
     private float[] local_fused_keyframes;
@@ -30,7 +30,7 @@ public class Animator
         //MatrixHelper.matrix_printer(local_keyframess_2d[0]);
         this.timestamps = timestamps;
         for(int i = 0; i < this.timestamps.length; i++) this.timestamps[i] = this.timestamps[i] - this.timestamps[0];
-        this.local_keyframes_2d =local_keyframess_2d;
+        this.local_keyframes_2d = local_keyframess_2d;
 
         //Log.e("", "" + local_keyframes_2d.length);
         start_time = elapsedRealtime();
@@ -42,7 +42,6 @@ public class Animator
         this.bones_structure = bones_structure;
         calcFusedGlobals( 0f,0);  //set first Pose
         //erste keyframe zu global keyframe
-
     }
 
     public  float[] fuse_locals( float progress, float[] m_one, float[] m_two)
@@ -66,9 +65,9 @@ public class Animator
     }
 
     public float[] update_animation( boolean paused) {
-        float motion_speed = 1000.0f;
+        float motion_speed = 1000.0f;  // starttime ist in milliseconds 1000 ms
         if( paused){ // warten vorm workout/ mögliche pause
-            start_time = elapsedRealtime() -curTime;
+            start_time = elapsedRealtime() - curTime;
             return global_fused_keyframes;
         }
         curTime = ( elapsedRealtime() - start_time);

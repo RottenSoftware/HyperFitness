@@ -38,12 +38,19 @@ public class MatrixHelper
         m[15] = 0f;
     }
 
+public static void matrix_selector( float[] matrices, int which){
+    float[] matrix = new float[16];
+    for(int i = 0; i < 16; i++){
+        matrix[i] = matrices[ which*16 +i];
+    }
+    matrix_printer(matrix);
+}
 
     public static boolean matrix_printer(float[] matrix)
     {
-        //if(matrix.length != 16) return false;
+        if(matrix.length != 16) return false;
 
-        //for(int i = 0; i < 4; i++) Log.e("matrix","matrix line: " + i + "elements: " + matrix[i*4] + " " + matrix[i*4+1] + " " + matrix[i*4+2] + " " + matrix[i*4 + 3]);
+        for(int i = 0; i < 4; i++) Log.e("matrix","matrix line: " + i + "elements: " + matrix[i*4] + " " + matrix[i*4+1] + " " + matrix[i*4+2] + " " + matrix[i*4 + 3]);
 
         return true;
     }
@@ -76,18 +83,13 @@ public class MatrixHelper
     {
         float[] copy = copy_matrix(in_matrix);
 
-
-
         //move
         float[] model_Matrix = new float[16];
         setIdentityM(model_Matrix, 0);
         translateM(model_Matrix,0 ,d_x, d_y, d_z);
-
         Matrix.multiplyMM(copy, 0, in_matrix, 0, model_Matrix, 0);
 
         in_matrix = copy_matrix(copy);
-
-
 
         //scale
         float[] scalem = new float[16];
@@ -101,7 +103,6 @@ public class MatrixHelper
         in_matrix = copy_matrix(copy);
 
         //rotation
-
         float[] mRotationMatrix_x = new float[16];
         float[] mRotationMatrix_y = new float[16];
         float[] mRotationMatrix_z = new float[16];
@@ -115,16 +116,9 @@ public class MatrixHelper
         Matrix.multiplyMM(rot_xy, 0, mRotationMatrix_y, 0, mRotationMatrix_x, 0);
         Matrix.multiplyMM(rot_xyz, 0, mRotationMatrix_z, 0, rot_xy, 0);
         // eigene funktion?^^
-
         Matrix.multiplyMM(copy, 0, in_matrix, 0, rot_xyz, 0);
         in_matrix = copy_matrix(copy);
-
-
-
-
-
         return in_matrix;
-
     }
 
 

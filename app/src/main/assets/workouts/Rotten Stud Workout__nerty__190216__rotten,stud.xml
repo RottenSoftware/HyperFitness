@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workout>
+	<level>0</level>
+	<title>
+		<de>Rotten Stud Training</de>
+		<en>Rotten Stud Workout</en>
+		<es>Rotten Stud Ejercicios</es>
+	</title>
+	<description>
+        <de>Einfach gut in Form: 15 min jeden Tag</de>
+        <en>Be in shape: \n15 minutes every Day</en>
+        <es>Simplemente en forma: 15 min cada día</es>
+	</description>
+	<models>
+		<Model_Object>
+			<texture_names>
+				<String>model_texture</String>
+			</texture_names>
+			<model_name>mesh_b</model_name>
+			<bones_name>bones_b</bones_name>
+		</Model_Object>
+	</models>
+	<pages>
+		<Page>
+			<title>
+				<de>Deadlifts</de>
+				<en>Deadlifts</en>
+				<es>Deadlifts</es>
+            </title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+                <time>30</time>
+            </timer>
+			<keyframes>rotten_deadlifts</keyframes>
+		</Page>
+		<Page>
+            <title>
+				<de>Crunches</de>
+				<en>Crunches</en>
+            </title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+                <time>35</time>
+            </timer>
+			<keyframes>rotten_crunch</keyframes>
+		</Page>
+		<Page>
+            <title>
+				<en>Sit Ups</en>
+            </title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+                <time>15</time>
+            </timer>
+			<keyframes>rotten_situp</keyframes>
+		</Page>
+	</pages>
+</workout>

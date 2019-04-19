@@ -85,10 +85,8 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glEnable(GL_DEPTH_TEST);
 
-
-        workout = new Workout(context);
+        workout = new Workout( context);
         touch_point_parser = new Touch_point_parser(0f,0f);
-
     }
 
     @Override

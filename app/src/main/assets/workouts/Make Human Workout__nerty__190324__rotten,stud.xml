@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workout>
+	<level>0</level>
+	<title>
+		<de>Make Human Training</de>
+		<en>Make Human Workout</en>
+		<es>Make Human Ejercicios</es>
+	</title>
+	<description>
+        <de>Bau deinen Koerper auf!</de>
+        <en>Be in shape: \n15 minutes every Day</en>
+        <es>Simplemente en forma: 15 min cada día</es>
+	</description>
+	<models>
+		<Model_Object>
+			<scale>6.0</scale>
+			<texture_names>
+				<String>makeHumanBodySuit</String>
+			</texture_names>
+			<model_name>test_man_make_human_mesh</model_name>
+			<bones_name>test_man_make_human_bones</bones_name>
+		</Model_Object>
+	</models>
+	<pages>
+		<Page>
+			<title>
+				<en>Test Exercise</en>
+            </title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+                <time>99</time>
+            </timer>
+			<keyframes>test_man_make_human_keyframes</keyframes>
+		</Page>
+	</pages>
+</workout>

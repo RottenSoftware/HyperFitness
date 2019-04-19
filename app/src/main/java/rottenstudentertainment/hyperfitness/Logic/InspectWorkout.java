@@ -30,7 +30,7 @@ public class InspectWorkout {
         for( int i = 0; i < exercises.size(); i++){
             Page exercise = exercises.get(i);
             LinearLayout exerciseUiUnit = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.inspect_workout_exercise_entry, null);
-            String exercise_number = i + "";
+            String exercise_number = (i + 1) + "";
             String title = exercise.title.toString();
             int time = exercise.timer.time;
             total_duration += exercise.timer.time;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workout>
+	<level>0</level>
+	<title>
+		<de>Demo Training</de>
+		<en>Demo Workout</en>
+		<es>Demo Ejercicios</es>
+	</title>
+	<description>
+        <de>Bau deinen Koerper auf!</de>
+        <en>Be in shape: \n15 minutes every Day</en>
+        <es>Simplemente en forma: 15 min cada día</es>
+	</description>
+	<models>
+		<Model_Object>
+			<scale>6.0</scale>
+			<texture_names>
+				<String>makeHumanBodySuit</String>
+			</texture_names>
+			<model_name>test_mesh</model_name>
+			<bones_name>test_bones</bones_name>
+		</Model_Object>
+	</models>
+	<pages>
+		<Page>
+			<title>
+				<en>Plank</en>
+            </title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+                <time>99</time>
+            </timer>
+			<keyframes>demo_plank_keyframes</keyframes>
+		</Page>
+		<Page>
+			<title>
+				<en>Situps</en>
+			</title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+				<time>99</time>
+			</timer>
+			<keyframes>demo_situp_keyframes</keyframes>
+		</Page>
+		<Page>
+			<title>
+				<en>Toe To Toe's</en>
+			</title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+				<time>99</time>
+			</timer>
+			<keyframes>demo_toetotoe_keyframes</keyframes>
+		</Page>
+		<Page>
+			<title>
+				<en>Leg Crunches</en>
+			</title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+				<time>99</time>
+			</timer>
+			<keyframes>demo_leg_crunch_keyframes</keyframes>
+		</Page>
+	</pages>
+</workout>

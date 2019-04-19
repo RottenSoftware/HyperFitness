@@ -7,12 +7,11 @@
 
 
     <LinearLayout
+        style="@style/HyperLayoutBar"
         android:id="@+id/headerView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        android:background="@color/hyperGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Workout"
-            android:textSize="30sp" />
+            style="@style/HyperLayoutHeader" />
     </LinearLayout>
 
     <ScrollView
@@ -30,7 +29,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="0dp"
-        android:background="@color/hyperBlue"
+        style="@style/HyperScroll"
         app:layout_constraintBottom_toTopOf="@+id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +38,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/hyperBlue"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            style="@style/HyperScrollBackground"
             android:orientation="vertical">
 
             <include layout="@layout/inspect_workout_level" />
@@ -52,12 +49,11 @@
     </ScrollView>
 
     <LinearLayout
+        style="@style/HyperLayoutBar"
         android:id="@+id/bottomView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        android:background="@color/hyperGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

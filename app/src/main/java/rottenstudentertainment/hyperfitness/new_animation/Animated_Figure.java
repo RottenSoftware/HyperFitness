@@ -5,10 +5,12 @@ import android.opengl.GLES20;
 
 import rottenstudentertainment.hyperfitness.MyGLRenderer;
 import rottenstudentertainment.hyperfitness.OpenGL.DataBuffer;
+import rottenstudentertainment.hyperfitness.OpenGL.Matrix4x4;
 import rottenstudentertainment.hyperfitness.OpenGL.VertexBuffer;
 import rottenstudentertainment.hyperfitness.TextureHelper;
 
 import rottenstudentertainment.hyperfitness.globals.Globals;
+import rottenstudentertainment.hyperfitness.util.MatrixHelper;
 import rottenstudentertainment.hyperfitness.util.TextResourceReader;
 
 import java.nio.FloatBuffer;
@@ -46,6 +48,9 @@ public class Animated_Figure
     private final ShortBuffer boneIndicesBuffer;
     private final FloatBuffer textureBuffer;
 
+    private float scale = 1.0f;
+    private Matrix4x4 mvpMatrix;
+
     private final static int INDICES_STRIDE = 3*2;
     private final static int TEXTURE_STRIDE = 2*4;
     private final int mProgram;
@@ -80,21 +85,12 @@ public class Animated_Figure
 
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
-    /*
-    public Animated_Figure( Context context, String mesh_file, String bones_file, String keyframes_file, String texture_file){
-        mesh = Extract_mesh_bones_keyframes.read_in_mesh_binary( context, mesh_file);
-        //Log.e("fast_animated", "successfully loaded: mesh");
-        bones = Extract_mesh_bones_keyframes.read_in_bones_binary( context, bones_file); //bones - skeleton
-        //Log.e("fast_animated", "successfully loaded: bones");
-        texture_file = "3d/textures/" + texture_file + ".png";
-        texture = TextureHelper.loadAssetTexture(context, texture_file);
-    }
-    */
-
     public Animated_Figure( Context context, Model model, String keyframes_file) {
         mesh = model.mesh;
         bones = model.bones;
         texture = model.texture;
+        scale = model.scale;
+        mvpMatrix = new Matrix4x4();
         motion_keyframe = Extract_mesh_bones_keyframes.read_in_keyframes_binary( context, keyframes_file); //import poses
         //Log.e("fast_animated", "successfully loaded: keyframe");
 
@@ -106,8 +102,6 @@ public class Animated_Figure
         normalBuffer = (FloatBuffer) DataBuffer.setBuffer( mesh.get_normals());
         weightBuffer = (FloatBuffer) DataBuffer.setBuffer( mesh.get_skin_weights_vec3());
         textureBuffer = (FloatBuffer) DataBuffer.setBuffer( mesh.get_tex());
-
-
 
         // initialize short buffer for bone indices
         boneIndicesBuffer = (ShortBuffer) DataBuffer.setBuffer( mesh.get_skin_incdices_vec3());
@@ -172,14 +166,11 @@ public class Animated_Figure
         }
 
 
-        if(Globals.useGPUStorage)
-        {
+        if(Globals.useGPUStorage) {
             // Enable a handle to the triangle vertices
             //GLES20.glEnableVertexAttribArray(mPositionHandle);
             meshBuffer.setVertexAttribPointer(0, mPositionHandle, COORDS_PER_VERTEX, VERTEX_STRIDE);
-        }
-        else
-        {
+        } else {
             DataBuffer.enableAndSetVertexAttributes( mPositionHandle, VERTEX_STRIDE, COORDS_PER_VERTEX, vertexBuffer);
         }
 
@@ -193,7 +184,9 @@ public class Animated_Figure
         MyGLRenderer.checkGlError("glGetUniformLocation");
 
         // Apply the projection and view transformation
-        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+        this.mvpMatrix.setMatrix( mvpMatrix);
+        this.mvpMatrix.scaleMatrix( this.scale);
+        GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, this.mvpMatrix.getMatrix(), 0);
         MyGLRenderer.checkGlError("glUniformMatrix4fv");
 
 
@@ -214,11 +207,11 @@ public class Animated_Figure
         else  GLES20.glUniformMatrix4fv( mPose_handle, animator.get_global_keyframes().length/16, true, keyframebuffer, 0);
         MyGLRenderer.checkGlError("glUniformMatrix4fv");
 
+        //MatrixHelper.matrix_selector( bones.get_invBindMats(), 50);
 
         // GLES20.glDisable(GL_CULL_FACE);
         // Draw
         glDrawArrays(GL_TRIANGLES, 0, mesh.get_vertices().length/3);
-
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);

@@ -3,18 +3,17 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/HyperOption"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@color/hyperBlue"
     android:onClick="optionClicked"
-    >
+    android:paddingTop="5dp">
+
     <TextView
+        style="@style/HyperTableData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Test"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="Test" />
 </RelativeLayout>
 
 

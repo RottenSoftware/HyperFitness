@@ -1,6 +1,6 @@
     uniform mat4 uMVPMatrix;
-    uniform mat4 invbones[50];
-    uniform mat4 pose[50];
+    uniform mat4 invbones[75];
+    uniform mat4 pose[75];
 
 
     attribute vec3 vPosition;
