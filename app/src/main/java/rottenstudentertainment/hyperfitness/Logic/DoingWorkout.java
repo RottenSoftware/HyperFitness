@@ -20,6 +20,7 @@ public class DoingWorkout {
         //seperate Fkt!!
         //mGLView = new MyGLSurfaceView(this);
         ViewGroup container = (ViewGroup) activity.findViewById( R.id.container);
+        //container.removeView(mGLView);
         container.addView( mGLView);
 
         View skipButton =  activity.findViewById( R.id.skipButton);
@@ -31,7 +32,6 @@ public class DoingWorkout {
     public static void setTitle( OpenGLES20Activity activity, Page curPage){
         Runnable runnable = new SetExerciseTitleRunnable(activity, curPage);
         activity.runOnUiThread( runnable);
-
     }
 
     public static void setUpExerciseStartQueque( ){

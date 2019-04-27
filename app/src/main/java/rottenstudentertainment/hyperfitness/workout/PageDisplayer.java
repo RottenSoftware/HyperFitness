@@ -74,7 +74,7 @@ public class PageDisplayer
 
         //put model
         fast_animations = new ArrayList<>();
-        fast_animations.add( new Animated_Figure(context, model, curPage.keyframes));
+        fast_animations.add( new Animated_Figure(context, model, curPage.keyframes, curPage.workout_speed));
 
         animator = new ArrayList<>();
 

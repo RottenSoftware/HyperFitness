@@ -13,7 +13,7 @@ import static rottenstudentertainment.hyperfitness.globals.Tester.initialView;
  */
 
 public class Globals {
-    public final static boolean DEVMODE = false;
+    public final static boolean DEVMODE = true;
 
     public final static boolean useGPUStorage = false;
     public final static boolean useLightning = true;

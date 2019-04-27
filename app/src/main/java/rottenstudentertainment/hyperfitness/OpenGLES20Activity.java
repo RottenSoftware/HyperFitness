@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import rottenstudentertainment.hyperfitness.AdMob.AdMob;
 import rottenstudentertainment.hyperfitness.Fitness.WorkoutWrapper;
@@ -88,6 +89,9 @@ public class OpenGLES20Activity extends Activity {
 
     public void switchView(){
         //mGLView = null;
+        if(mGLView.getParent() != null){
+            ((ViewGroup)mGLView.getParent()).removeView( mGLView);
+        }
         if ( AppState.curView.equals( CurView.SEARCH_WORKOUTS)) {
             setContentView( R.layout.search_workouts);
             SearchWorkouts.initSearchWorkouts( this);

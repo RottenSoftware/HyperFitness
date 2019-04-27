@@ -85,7 +85,7 @@ public class Animated_Figure
 
     private final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
-    public Animated_Figure( Context context, Model model, String keyframes_file) {
+    public Animated_Figure( Context context, Model model, String keyframes_file, float speed) {
         mesh = model.mesh;
         bones = model.bones;
         texture = model.texture;
@@ -94,7 +94,7 @@ public class Animated_Figure
         motion_keyframe = Extract_mesh_bones_keyframes.read_in_keyframes_binary( context, keyframes_file); //import poses
         //Log.e("fast_animated", "successfully loaded: keyframe");
 
-        animator = new Animator( motion_keyframe.get_time_stamps(), motion_keyframe.getLocal_keyframes_2d(), bones.get_structure());
+        animator = new Animator( motion_keyframe.get_time_stamps(), motion_keyframe.getLocal_keyframes_2d(), bones.get_structure(), speed);
 
         vertex_count = mesh.get_vertices().length;
 

@@ -24,8 +24,13 @@ public class Animator
     private float[] global_fused_keyframes;
     private float[] local_fused_keyframes;
     private Vector <Vector<Integer>> bones_structure;
+    private float workout_speed;
 
-    public Animator(float[] timestamps, float[][] local_keyframess_2d, Vector <Vector<Integer>> bones_structure)
+    public Animator(float[] timestamps, float[][] local_keyframess_2d, Vector <Vector<Integer>> bones_structure){
+        this( timestamps, local_keyframess_2d, bones_structure, 1.0f);
+    }
+
+    public Animator(float[] timestamps, float[][] local_keyframess_2d, Vector <Vector<Integer>> bones_structure, float speed)
     {
         //MatrixHelper.matrix_printer(local_keyframess_2d[0]);
         this.timestamps = timestamps;
@@ -40,6 +45,7 @@ public class Animator
         local_fused_keyframes = new float[local_keyframes_2d[0].length];
 
         this.bones_structure = bones_structure;
+        workout_speed = speed;
         calcFusedGlobals( 0f,0);  //set first Pose
         //erste keyframe zu global keyframe
     }
@@ -65,7 +71,7 @@ public class Animator
     }
 
     public float[] update_animation( boolean paused) {
-        float motion_speed = 1000.0f;  // starttime ist in milliseconds 1000 ms
+        float motion_speed = 1000.0f / workout_speed;  // starttime ist in milliseconds 1000 ms
         if( paused){ // warten vorm workout/ mögliche pause
             start_time = elapsedRealtime() - curTime;
             return global_fused_keyframes;
