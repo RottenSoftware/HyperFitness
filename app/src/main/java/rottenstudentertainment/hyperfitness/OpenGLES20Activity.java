@@ -101,7 +101,6 @@ public class OpenGLES20Activity extends Activity {
         } else if( AppState.curView.equals( CurView.DOING_WORKOUT)){
             setContentView( R.layout.app_container);
             DoingWorkout.initDoingWorkout(this, mGLView);
-
             AdMob.initializeAdMob( this);
             AdMob.loadAdBanner(this);
         }
@@ -122,9 +121,11 @@ public class OpenGLES20Activity extends Activity {
 
     public void buttonClicked( View v){
         if( AppState.curView.equals( CurView.INSPECT_WORKOUT)){
-            AppState.curView = CurView.DOING_WORKOUT;
-            switchView();
-            workoutWrapper.loadModel( this);
+            if( InspectWorkout.checkModelLoaded( this)){
+                AppState.curView = CurView.DOING_WORKOUT;
+                switchView();
+            }
+
         } else if( AppState.curView.equals(CurView.DOING_WORKOUT)){
             AppState.next_page( this);
         }

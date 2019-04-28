@@ -31,6 +31,12 @@ public class Model {
         if( texturePath != null){
             texture = TextureHelper.loadAssetTexture( context, texturePath);
         }
+    }
 
+    public boolean isLoaded(){
+        if( mesh == null) return false;
+        if( bones == null) return false;
+        if( texturePath == null) return false;
+        return true;
     }
 }

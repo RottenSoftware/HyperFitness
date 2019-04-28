@@ -17,10 +17,7 @@ import rottenstudentertainment.hyperfitness.workout.PageDisplayer;
 public class DoingWorkout {
     public static void initDoingWorkout(OpenGLES20Activity activity, GLSurfaceView mGLView){
 
-        //seperate Fkt!!
-        //mGLView = new MyGLSurfaceView(this);
         ViewGroup container = (ViewGroup) activity.findViewById( R.id.container);
-        //container.removeView(mGLView);
         container.addView( mGLView);
 
         View skipButton =  activity.findViewById( R.id.skipButton);

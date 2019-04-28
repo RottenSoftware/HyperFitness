@@ -8,10 +8,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rottenstudentertainment.hyperfitness.AndroidUtils.makeToast;
 import rottenstudentertainment.hyperfitness.Fitness.Page;
 import rottenstudentertainment.hyperfitness.Fitness.Workout;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.R;
+import rottenstudentertainment.hyperfitness.new_animation.Model;
 
 public class InspectWorkout {
 
@@ -20,6 +22,7 @@ public class InspectWorkout {
         setTitle( activity, workout);
         setDescription( activity, workout);
         setExerciseEntries( activity, workout);
+        activity.workoutWrapper.loadModel( activity);
     }
 
     public static void setExerciseEntries(final OpenGLES20Activity activity, Workout workout){
@@ -94,6 +97,16 @@ public class InspectWorkout {
         thread.start();
     }
 
+    public static boolean checkModelLoaded( OpenGLES20Activity activity){
+        Model model = activity.workoutWrapper.model;
+        if( model.isLoaded()){
+            return true;
+        } else{
+            makeToast.makeToast("model not yet loaded", activity);
+            return false;
+        }
+    }
+
 
     static class SetDescriptionRunnable implements Runnable{
         public OpenGLES20Activity activity;
@@ -102,7 +115,6 @@ public class InspectWorkout {
             this.activity = activity;
             this.workout = workout;
         }
-
         @Override
         public void run() {
             final TextView descriptionText =  (TextView) activity.findViewById( R.id.description_text);

@@ -27,13 +27,22 @@ public class WorkoutWrapper {
     }
 
     public void loadModel( Context context){
-        Model_Object model_obj = getModelFilenames();
-        Mesh mesh = Extract_mesh_bones_keyframes.read_in_mesh_binary( context, model_obj.model_name);
-        Bones bones = Extract_mesh_bones_keyframes.read_in_bones_binary( context, model_obj.bones_name);
-        String texturePath = "3d/textures/" + model_obj.texture_names.get(0) + ".png";
-        //int texture = TextureHelper.loadAssetTexture( context, texturePath); only possible in opengl thread ( renderer)
-        String scaleString = model_obj.scale;
-        model = new Model( mesh, scaleString, bones, texturePath);
+        final Context loadContext = context;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Logger.startTimeLog("loadModel", "loadModel");
+                Model_Object model_obj = getModelFilenames();
+                Mesh mesh = Extract_mesh_bones_keyframes.read_in_mesh_binary( loadContext, model_obj.model_name);
+                Bones bones = Extract_mesh_bones_keyframes.read_in_bones_binary( loadContext, model_obj.bones_name);
+                String texturePath = "3d/textures/" + model_obj.texture_names.get(0) + ".png";
+                //int texture = TextureHelper.loadAssetTexture( context, texturePath); only possible in opengl thread ( renderer)
+                String scaleString = model_obj.scale;
+                model = new Model( mesh, scaleString, bones, texturePath);
+                Logger.endTimeLog("loadModel", "loadModel");
+            }
+        });
+        thread.run();
     }
 
     private Model_Object getModelFilenames(){
