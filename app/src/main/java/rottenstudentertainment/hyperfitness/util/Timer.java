@@ -2,8 +2,10 @@ package rottenstudentertainment.hyperfitness.util;
 
 import android.content.Context;
 
+import rottenstudentertainment.hyperfitness.AndroidUtils.Color;
 import rottenstudentertainment.hyperfitness.OpenGL.Disc;
 import rottenstudentertainment.hyperfitness.OpenGL.Sprite;
+import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.TextureHelper;
 
 /**
@@ -15,10 +17,10 @@ public class Timer
 {
     private Context context;
     private Sprite sprite;
-    private Disc disc;
-    private Disc disc1;
-    private Disc disc2;
-
+    private Disc frontDisc;
+    private Disc backDisc;
+    private Color discBackColor;
+    private Color discFrontColor;
     //logic
     private long start_time;
     private long current_time;
@@ -51,10 +53,20 @@ public class Timer
         float inner_r = width;
         float outer_r = inner_r * 1.33f;
         int res = 72;
-        disc = new Disc(res,0f, outer_r,0.5f, 0.5f, 0.5f);
-        disc1 = new Disc(res,inner_r, outer_r,0.5f, 0.0f, 0.5f);
-        disc2 = new Disc(res,inner_r*1.1f ,outer_r* 0.92f,0.2f, 0.8f, 0.2f);
+        discBackColor = getColor(  R.color.hyperBlue);
+        //discBackColor = new Color(0,53,67);
+        discFrontColor = getColor(  R.color.hyperGreen);
+        frontDisc  = new Disc( res,inner_r, outer_r, discBackColor.getR(), discBackColor.getG(), discBackColor.getB());
+        backDisc = new Disc( res,inner_r*1.1f ,outer_r* 0.92f, discFrontColor.getR(), discFrontColor.getG(), discFrontColor.getB());
     }
+
+    private Color getColor( int resourceColor){
+        String hexColor = context.getResources().getString( resourceColor);
+        Color color = new Color( hexColor);
+        return color;
+    }
+
+
 
     public int getTime(){
         return curTime;
@@ -72,8 +84,8 @@ public class Timer
         curTime = (int) elapsed_time;
 
        // disc.draw(m, 0.15f, 0.2f, 0f);
-        disc1.draw(m, 0.15f, 0.2f, 0f);
-        disc2.draw(m, 0.15f, 0.2f, ((float) elapsed_time ) / (float) startTime) ;
+        frontDisc.draw(m, 0.15f, 0.2f, 0f);
+        backDisc.draw(m, 0.15f, 0.2f, ((float) elapsed_time ) / (float) startTime) ;
         draw_clock( m);
 
     }
