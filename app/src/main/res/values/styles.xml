@@ -15,6 +15,12 @@
     </style>
 
     <!-- HyperLayoutHeader -->
+    <style name="HyperContainerHeader">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- HyperLayoutHeader -->
     <style name="HyperLayoutBar">
         <item name="android:layout_height">50dp</item>
         <item name="android:background">@color/hyperGreen</item>

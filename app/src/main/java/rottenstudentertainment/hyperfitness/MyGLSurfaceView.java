@@ -82,19 +82,6 @@ public class MyGLSurfaceView extends GLSurfaceView {
                     dy = dy * -1 ;
                 }
 
-                mRenderer.setAngle(
-                        mRenderer.getAngle() +
-                        ((dx + dy) * TOUCH_SCALE_FACTOR));  // = 180.0f / 320
-
-                mRenderer.setPhiAngle(
-                        mRenderer.getPhiAngle() +
-                                ( dy * TOUCH_SCALE_FACTOR));  // = 180.0f / 320
-
-                mRenderer.setThetaAngle(
-                        mRenderer.getThetaAngle() +
-                                ( dx * TOUCH_SCALE_FACTOR));  // = 180.0f / 320
-
-
                 //rotation with global variable
                 Rotation_angle.angle += dx*TOUCH_SCALE_FACTOR;
 

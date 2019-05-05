@@ -24,22 +24,13 @@
 	<pages>
 		<Page>
 			<title>
-				<en>Plank</en>
-            </title>
-			<workout_speed>1.0f</workout_speed>
-			<timer>
-                <time>99</time>
-            </timer>
-			<keyframes>demo_plank_keyframes</keyframes>
-		</Page>
-		<Page>
-			<title>
 				<en>Situps</en>
 			</title>
 			<workout_speed>2.0f</workout_speed>
 			<timer>
 				<time>99</time>
 			</timer>
+            <start_angle>90</start_angle>
 			<keyframes>demo_situp_keyframes</keyframes>
 		</Page>
 		<Page>
@@ -50,7 +41,19 @@
 			<timer>
 				<time>99</time>
 			</timer>
+            <start_angle>90</start_angle>
 			<keyframes>demo_toetotoe_keyframes</keyframes>
+		</Page>
+		<Page>
+			<title>
+				<en>Plank</en>
+			</title>
+			<workout_speed>1.0f</workout_speed>
+			<timer>
+				<time>99</time>
+			</timer>
+            <start_angle>90</start_angle>
+			<keyframes>demo_plank_keyframes</keyframes>
 		</Page>
 		<Page>
 			<title>

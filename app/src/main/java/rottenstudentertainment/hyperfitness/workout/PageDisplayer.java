@@ -2,10 +2,12 @@ package rottenstudentertainment.hyperfitness.workout;
 
 import android.content.Context;
 
+import rottenstudentertainment.hyperfitness.Fitness.Page;
 import rottenstudentertainment.hyperfitness.Logic.DoingWorkout;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.Texture;
 import rottenstudentertainment.hyperfitness.globals.AppState;
+import rottenstudentertainment.hyperfitness.globals.Logger;
 import rottenstudentertainment.hyperfitness.new_animation.Animated_Figure;
 import rottenstudentertainment.hyperfitness.new_animation.Animator;
 import rottenstudentertainment.hyperfitness.new_animation.Model;
@@ -77,9 +79,10 @@ public class PageDisplayer
         fast_animations.add( new Animated_Figure(context, model, curPage.keyframes, curPage.workout_speed));
 
         animator = new ArrayList<>();
+        setAngle( curPage);
 
         DoingWorkout.setTitle( (OpenGLES20Activity) context, curPage);
-        DoingWorkout.setUpExerciseStartQueque();
+        DoingWorkout.setUpExerciseStartQueque( (OpenGLES20Activity) context);
         //load all textures from text file demand
         /*
         for( int i = 0; i < content.images.size(); i++)
@@ -146,8 +149,18 @@ public class PageDisplayer
         once = false;
     }
 
+    public static void setAngle(Page page){
+        try{
+            float angle = Float.parseFloat( page.start_angle);
+            Rotation_angle.angle = angle;
+        } catch(Exception e){
+            Rotation_angle.angle = 0f;
+        }
+    }
+
     public void draw_page(float[] m, float[] m3d)
     {
+        Logger.log("draw_page", "angle: " + Rotation_angle.angle);
         // 3d stuff
         glEnable(GL_DEPTH_TEST);
         float[] rot_m3d = MatrixHelper.move_rotate_scale_matrix( m3d, 1f, 0f, 0f, 0f, 0f, 0f, Rotation_angle.angle);

@@ -1,7 +1,9 @@
 package rottenstudentertainment.hyperfitness.globals;
 
+import rottenstudentertainment.hyperfitness.Fitness.Page;
 import rottenstudentertainment.hyperfitness.OpenGLES20Activity;
 import rottenstudentertainment.hyperfitness.globals.Globals;
+import rottenstudentertainment.hyperfitness.user_interface.Rotation_angle;
 
 /**
  * Created by Merty on 07.11.2017.
@@ -13,6 +15,10 @@ public class AppState
     private static int maxPages;
     public static String curView = CurView.SEARCH_WORKOUTS;
 
+    /* timer */
+    public static int pageTime = 0;
+    public static int curPageTime =0;
+    public static int curMaxSeconds =0;
 
     public static void set_i( int new_i)
     {

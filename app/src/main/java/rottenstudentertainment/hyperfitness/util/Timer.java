@@ -4,9 +4,11 @@ import android.content.Context;
 
 import rottenstudentertainment.hyperfitness.AndroidUtils.Color;
 import rottenstudentertainment.hyperfitness.OpenGL.Disc;
+import rottenstudentertainment.hyperfitness.OpenGL.Matrix4x4;
 import rottenstudentertainment.hyperfitness.OpenGL.Sprite;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.TextureHelper;
+import rottenstudentertainment.hyperfitness.globals.AppState;
 
 /**
  * Created by Merty on 06.11.2017.
@@ -34,16 +36,23 @@ public class Timer
     private float pos_y;
     private int startTime;
     private int curTime;
+    private int minutes;
+    private final int secondsOfMinute = 60;
+    private float outerInnerRatio = 1.33f;
 
-    public Timer(Context context, int startTime)
+    public Timer( Context context, int startTime)
     {
-        this.context=context;
+        this.context = context;
         this.height = 0.15f/2.0f; //harcdcoded position/size for now
         this.width = 0.15f/2.0f;
         this.pos_x= 0.6f;
         this.pos_y = 0.4f;
         this.startTime = startTime;
+        AppState.pageTime = startTime;
+        AppState.curPageTime = startTime;
+        AppState.curMaxSeconds = startTime%60;
         this.curTime = startTime;
+        this.minutes = startTime/60;
 
         sprite = new Sprite( context, TextureHelper.loadAssetTexture( context, "timer/atlas/sq_number_atlas.png"), width, height);
 
@@ -51,7 +60,7 @@ public class Timer
         current_time = System.currentTimeMillis();
 
         float inner_r = width;
-        float outer_r = inner_r * 1.33f;
+        float outer_r = inner_r * outerInnerRatio;
         int res = 72;
         discBackColor = getColor(  R.color.hyperBlue);
         //discBackColor = new Color(0,53,67);
@@ -74,7 +83,6 @@ public class Timer
 
     public void draw_timer( float[] m, boolean paused)
     {
-        m = MatrixHelper.move_rot_objects( m,1.0f, pos_x, pos_y,0f);
         current_time = System.currentTimeMillis();
         if( paused){
             start_time = current_time - curTime;
@@ -83,25 +91,34 @@ public class Timer
         if(elapsed_time<0) elapsed_time = 0;
         curTime = (int) elapsed_time;
 
-       // disc.draw(m, 0.15f, 0.2f, 0f);
-        frontDisc.draw(m, 0.15f, 0.2f, 0f);
-        backDisc.draw(m, 0.15f, 0.2f, ((float) elapsed_time ) / (float) startTime) ;
-        draw_clock( m);
+        m = MatrixHelper.move_rot_objects( m,1.0f, pos_x, pos_y,0f);
+        if( startTime >= 60){
+            //draw draw
+            float shift = width * outerInnerRatio*1.15f; //width == inner radius
+            float[] minuteMatrix = Matrix4x4.moveMatrix(0f, shift,0f, m);
+            draw_timers( minuteMatrix, curTime/60, (float)curTime/ (float) AppState.pageTime); //minutes
+            float[] secondsMatrix = Matrix4x4.moveMatrix(0f, -shift,0f, m);
+            draw_timers( secondsMatrix, curTime%60, (float)(curTime%60)/ (float)secondsOfMinute); //minutes
 
+        } else{
+            draw_timers( m,curTime%60,  (float)(curTime%60)/ (float)secondsOfMinute);
+        }
     }
 
-    private void draw_clock(float[] m)
+    private void draw_timers( float[] m, int displayedTime, float progress){
+        frontDisc.draw(m, 0.15f, 0.2f, 0f);
+        backDisc.draw(m, 0.15f, 0.2f, progress) ;
+        draw_clock( m, displayedTime);
+    }
+
+    private void draw_clock(float[] m, int displayedTime)
     {
-
-
-       if( curTime >= 10)
+       if( displayedTime >= 10)
        {
-           draw_number(m, curTime / 10, -width/1.25f);
-           draw_number(m, curTime % 10, width/1.25f);
+           draw_number(m, displayedTime / 10, -width/1.25f);
+           draw_number(m, displayedTime % 10, width/1.25f);
        }
-        else  draw_number(m, curTime % 10, 0f);
-
-
+        else  draw_number(m, displayedTime % 10, 0f);
     }
 
     private void draw_number( float[] m, int rest_time, float x_offset)

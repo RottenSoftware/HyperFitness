@@ -21,6 +21,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
+import rottenstudentertainment.hyperfitness.globals.Logger;
 import rottenstudentertainment.hyperfitness.util.Framerate_display;
 import rottenstudentertainment.hyperfitness.util.MatrixHelper;
 import rottenstudentertainment.hyperfitness.util.Touch_point_parser;
@@ -47,7 +48,6 @@ import static android.opengl.Matrix.translateM;
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private static final String TAG = "MyGLRenderer";
-    //private Sprite_Square sprite_square;
 
     private float[] ortho_Matrix = new float[16];
     private Touch_point_parser touch_point_parser;
@@ -60,10 +60,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private  float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
-    private final float[] mRotationMatrix = new float[16];
-    private final float[] mRotationMatrix_x = new float[16];
-    private final float[] mRotationMatrix_y = new float[16];
-    private final float[] mRotationMatrix_total = new float[16];
     private final float[] model_Matrix = new float[16];
 
     private float mAngle;
@@ -87,22 +83,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         workout = new Workout( context);
         touch_point_parser = new Touch_point_parser(0f,0f);
-    }
-
-    @Override
-    public void onDrawFrame(GL10 unused) {
-        float[] scratch = new float[16];
-        float[] m_buffer = new float[16];
-        float[] model_buffer = new float[16];
-
-        framerate_display.check_framerate();
-
-        long startTime = System.currentTimeMillis();
-
-        // Draw background color
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-
-
 
         //move stuff with the model_matrix
         setIdentityM(model_Matrix, 0);
@@ -110,45 +90,15 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0f);
+    }
 
-
-        Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, 1.0f);
-
-        Matrix.setRotateM(mRotationMatrix_x, 0, PhiAngle, 1.0f, 0, 0);
-
-        Matrix.setRotateM(mRotationMatrix_y, 0, ThetaAngle, 0, 1.0f, 0);
-
-        // Combine the rotation matrix with the projection and camera view
-        // Note that the mMVPMatrix factor *must be first* in order
-        // for the matrix multiplication product to be correct.
-        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-
-        Matrix.multiplyMM(mRotationMatrix_total, 0, mRotationMatrix_x, 0, mRotationMatrix_y, 0);
-        Matrix.multiplyMM(m_buffer, 0, mMVPMatrix, 0, mRotationMatrix_total, 0);
-
-
-
-        float size=1.0f;
-        float[] shit = new float[16];
-        float[] scalem = new float[16];
-        setIdentityM(scalem,0);
-        scalem[0]= -size;
-        scalem[5]= size;
-        scalem[10]= size;
-
-        Matrix.multiplyMM(shit, 0, m_buffer, 0,scalem, 0);
-
-
+    @Override
+    public void onDrawFrame(GL10 unused) {
+        framerate_display.check_framerate();
+        // Draw background color
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         workout.update_input( touch_point_parser);
-
         workout.draw_page( ortho_Matrix, mMVPMatrix);
-
-        long endTime = System.currentTimeMillis(); // end of frame time
-        long dt =  (endTime - startTime);  // length of frame time
-        if(dt < 33)
-        {
-            //SystemClock.sleep( 33 - dt);
-        }
     }
 
     @Override
