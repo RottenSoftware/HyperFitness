@@ -9,6 +9,7 @@ import rottenstudentertainment.hyperfitness.OpenGL.Sprite;
 import rottenstudentertainment.hyperfitness.R;
 import rottenstudentertainment.hyperfitness.TextureHelper;
 import rottenstudentertainment.hyperfitness.globals.AppState;
+import rottenstudentertainment.hyperfitness.globals.Logger;
 
 /**
  * Created by Merty on 06.11.2017.
@@ -24,8 +25,6 @@ public class Timer
     private Color discBackColor;
     private Color discFrontColor;
     //logic
-    private long start_time;
-    private long current_time;
     private float sprite_x;
     private float sprite_y;
 
@@ -34,30 +33,28 @@ public class Timer
     private float width;
     private float pos_x;
     private float pos_y;
-    private int startTime;
-    private int curTime;
-    private int minutes;
     private final int secondsOfMinute = 60;
     private float outerInnerRatio = 1.33f;
 
-    public Timer( Context context, int startTime)
-    {
+    public Timer( Context context, int startTime){
         this.context = context;
         this.height = 0.15f/2.0f; //harcdcoded position/size for now
         this.width = 0.15f/2.0f;
         this.pos_x= 0.6f;
         this.pos_y = 0.4f;
-        this.startTime = startTime;
         AppState.pageTime = startTime;
-        AppState.curPageTime = startTime;
-        AppState.curMaxSeconds = startTime%60;
-        this.curTime = startTime;
-        this.minutes = startTime/60;
+        AppState.curMillis = System.currentTimeMillis();
+         if( AppState.curPageTime <= 0){
+            AppState.curPageTime = startTime;
+            AppState.startMillis = System.currentTimeMillis();
+         } else{
+            AppState.startMillis = AppState.curMillis - AppState.curPageTime*1000;
+         }
+        if(  60 > AppState.curPageTime - startTime && AppState.curPageTime/60 == startTime/60){
+            AppState.curMaxSeconds = AppState.pageTime%60; //reset progress max to current time left of one minute
+        }
 
         sprite = new Sprite( context, TextureHelper.loadAssetTexture( context, "timer/atlas/sq_number_atlas.png"), width, height);
-
-        start_time = System.currentTimeMillis();
-        current_time = System.currentTimeMillis();
 
         float inner_r = width;
         float outer_r = inner_r * outerInnerRatio;
@@ -75,33 +72,37 @@ public class Timer
         return color;
     }
 
-
-
     public int getTime(){
-        return curTime;
+        return AppState.curPageTime;
     }
 
     public void draw_timer( float[] m, boolean paused)
     {
-        current_time = System.currentTimeMillis();
+        Logger.log("draw_timer", "pageTime: " + AppState.pageTime + " curTime: " + AppState.curPageTime + " curSeconds: " + AppState.curMaxSeconds);
+        if( AppState.curPageTime%60 == 0) AppState.curMaxSeconds = 60; //reset progress to 1 minute
+        AppState.curMillis = System.currentTimeMillis();
+        float elapsed_time;
         if( paused){
-            start_time = current_time - curTime;
+            AppState.startMillis = AppState.curMillis - AppState.curPageTime;
+            elapsed_time = AppState.curPageTime;
+        } else{
+            elapsed_time = AppState.pageTime - (int) (AppState.curMillis - AppState.startMillis)/1000;
+            Logger.log("draw_timer", AppState.curMillis + " " + AppState.startMillis);
         }
-        float elapsed_time =  paused ? curTime : startTime - (int) (current_time-start_time)/1000;
         if(elapsed_time<0) elapsed_time = 0;
-        curTime = (int) elapsed_time;
+        AppState.curPageTime = (int) elapsed_time;
 
         m = MatrixHelper.move_rot_objects( m,1.0f, pos_x, pos_y,0f);
-        if( startTime >= 60){
+        if( AppState.pageTime >= 60){
             //draw draw
             float shift = width * outerInnerRatio*1.15f; //width == inner radius
             float[] minuteMatrix = Matrix4x4.moveMatrix(0f, shift,0f, m);
-            draw_timers( minuteMatrix, curTime/60, (float)curTime/ (float) AppState.pageTime); //minutes
+            draw_timers( minuteMatrix, AppState.curPageTime/60, (float)AppState.curPageTime/ (float) AppState.pageTime); //minutes
             float[] secondsMatrix = Matrix4x4.moveMatrix(0f, -shift,0f, m);
-            draw_timers( secondsMatrix, curTime%60, (float)(curTime%60)/ (float)secondsOfMinute); //minutes
+            draw_timers( secondsMatrix, AppState.curPageTime%60, (float)(AppState.curPageTime%60)/ (float)AppState.curMaxSeconds); //minutes
 
         } else{
-            draw_timers( m,curTime%60,  (float)(curTime%60)/ (float)secondsOfMinute);
+            draw_timers( m,AppState.curPageTime%60,  (float)(AppState.curPageTime%60)/ (float)AppState.curMaxSeconds);
         }
     }
 

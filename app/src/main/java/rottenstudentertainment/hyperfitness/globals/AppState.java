@@ -19,6 +19,9 @@ public class AppState
     public static int pageTime = 0;
     public static int curPageTime =0;
     public static int curMaxSeconds =0;
+    public static long startMillis = 0;
+    public static long curMillis = 0;
+
 
     public static void set_i( int new_i)
     {
